@@ -1,0 +1,1232 @@
+[
+  {
+    "command": "ADC",
+    "operands": "Rd, Rr",
+    "operation": "Rd\u2190Rd + Rr + C",
+    "description": "Add two registers with carry",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0001 11rd dddd rrrr",
+    "example": "\u00a0\u00a0 ;add r1:r0 to r3:r[1]<br>  add r2,r0\u00a0\u00a0\u00a0\u00a0 ; add low byte adc r3,r1\u00a0\u00a0\u00a0\u00a0 ; add high byte "
+  },
+  {
+    "command": "ADD",
+    "operands": "Rd,Rr",
+    "operation": "Rd\u2190Rd + Rr",
+    "description": "Add two registers",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0000 11rd dddd rrrr",
+    "example": "\u00a0\u00a0 ;add r1:r0 to r3:r[1]<br>  add r2,r0\u00a0\u00a0\u00a0\u00a0 ; add low byte adc r3,r1\u00a0\u00a0\u00a0\u00a0 ; add high byte "
+  },
+  {
+    "command": "ADIW",
+    "operands": "Rh:Rl, K",
+    "operation": "Rh:Rl\u2190Rh:Rl + K",
+    "description": "Add immediate to Word (0 \u2264 K \u2264 63)",
+    "flags": "---SVNZC",
+    "cycles": "2",
+    "opcode": "1001 0110 KKdd KKKK",
+    "example": "adiw ZH:ZL, 7 ; add 7 to Z "
+  },
+  {
+    "command": "AND",
+    "operands": "Rd,Rr",
+    "operation": "Rd\u2190Rd \u2022 Rr",
+    "description": "Logical AND two registers",
+    "flags": "---SVNZ-,\n  \nV cleared",
+    "cycles": "1",
+    "opcode": "0010 00rd dddd rrrr",
+    "example": "ldi r16, 1\u00a0\u00a0\u00a0 ; set 0000 0001 in<br>  r16 and r2, r16\u00a0\u00a0 ; isolate bit 0 in r2 "
+  },
+  {
+    "command": "ANDI",
+    "operands": "Rd, K",
+    "operation": "Rd\u2190Rd \u2022 K",
+    "description": "Logical AND with immediate (16 \u2264 d \u2264 31)",
+    "flags": "---SVNZ-,\n  \nV cleared",
+    "cycles": "1",
+    "opcode": "0111 KKKK dddd KKKK",
+    "example": "andi<br>  r18,$10\u00a0 ; isolate bit 4 in r18 "
+  },
+  {
+    "command": "ASR",
+    "operands": "Rd",
+    "operation": "C\u2190Rd(0), Rd(6\u20260) \u2190Rd(7\u20261), Rd(7) \u2190Rd(7)",
+    "description": "Arithmetic shift right",
+    "flags": "---SVNZC",
+    "cycles": "1",
+    "opcode": "1001 010d dddd 0101",
+    "example": "asr r17\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; r17 = r17 / 2 "
+  },
+  {
+    "command": "BCLR",
+    "operands": "s",
+    "operation": "SREG(s) \u21900",
+    "description": "Clear bit in status register",
+    "flags": "SREG(s)",
+    "cycles": "1",
+    "opcode": "1001 0100 1sss 1000",
+    "example": "bclr 7\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; disable<br>  interrupts "
+  },
+  {
+    "command": "BLD",
+    "operands": "Rd,b",
+    "operation": "Rd(b) \u2190T",
+    "description": "Load bit in register from T",
+    "flags": "-T------",
+    "cycles": "1",
+    "opcode": "1111 100d dddd 0bbb",
+    "example": "bst r1, 2\u00a0 ; store bit 2 of r1 in<br>  T bld r0, 4\u00a0 ; load T into bit 4 of r0 "
+  },
+  {
+    "command": "BRBC",
+    "operands": "s,k",
+    "operation": "if(SREG(s) = 0) PC\u2190PC + k + 1",
+    "description": "Branch if status register flag cleared",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 01kk kkkk ksss",
+    "example": "cpi r20, 5 ; compare r20 to value<br>  5 brbc 1,noteq\u00a0 ; Branch if zero flag 0 ... noteq: nop\u00a0\u00a0\u00a0 ; do nothing "
+  },
+  {
+    "command": "BRBS",
+    "operands": "s,k",
+    "operation": "if(SREG(s) = 1) PC\u2190PC + k + 1",
+    "description": "Branch if status register flag set",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 00kk kkkk ksss",
+    "example": "bst r0, 3\u00a0 ; load T with bit 3 of<br>  r0 brbs 6, bitset ; Branch if T was set "
+  },
+  {
+    "command": "BRCC",
+    "operands": "k",
+    "operation": "if(C=0) then PC\u2190PC + k + 1",
+    "description": "Branch if carry cleared, Same as brbc 0,k and brsh",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 01kk kkkk k000",
+    "example": "\u00a0add r22, r23\u00a0 ; add r23 to r22 <br>brcc nocarry\u00a0 ; branch if<br>  carry\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; cleared "
+  },
+  {
+    "command": "BRCS",
+    "operands": "k",
+    "operation": "if(C=1) then PC\u2190PC + k + 1",
+    "description": "Branch if carry set, Same as brbs 0,k and brlo",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 00kk kkkk k000",
+    "example": "\u00a0cp r26, r25 ; compare r26 with<br>  r25 <br>brcs label\u00a0 ; branch if carry set<br>  "
+  },
+  {
+    "command": "BREAK",
+    "operands": "",
+    "operation": "",
+    "description": "For on-chip debug only",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "1001 0101 1001 1000",
+    "example": "\u00a0"
+  },
+  {
+    "command": "BREQ",
+    "operands": "k",
+    "operation": "if(Z=1) then PC\u2190PC + k + 1",
+    "description": "Branch if equal, Same as brbs 1,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 00kk kkkk k001",
+    "example": "\u00a0cp r1,r0\u00a0\u00a0\u00a0\u00a0 ; compare r1 and r0<br>  <br>breq label\u00a0\u00a0 ; branch if equal "
+  },
+  {
+    "command": "BRGE",
+    "operands": "k",
+    "operation": "if(S=0) then PC\u2190PC + k + 1",
+    "description": "Branch if greater or equal (signed), Same as brbc 4,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 01kk kkkk k100",
+    "example": "\u00a0cp r1, r2 <br>brge label ; branch if r1 \u2265<br>  r2\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (signed) "
+  },
+  {
+    "command": "BRHC",
+    "operands": "k",
+    "operation": "if(H=0) then PC\u2190PC + k + 1",
+    "description": "Branch if half-carry flag cleared, Same as brbc 5,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 01kk kkkk k101",
+    "example": "\u00a0bhhc label "
+  },
+  {
+    "command": "BRHS",
+    "operands": "k",
+    "operation": "if(H=1) then PC\u2190PC + k + 1",
+    "description": "Branch if half-carry flag set, Same as brbs 5,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 00kk kkkk k101",
+    "example": "bhrs label "
+  },
+  {
+    "command": "BRID",
+    "operands": "k",
+    "operation": "if(I=0) then PC\u2190PC + k + 1",
+    "description": "Branch if interrupt disabled, Same as brbc 7,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 01kk kkkk k111",
+    "example": "\u00a0brid label "
+  },
+  {
+    "command": "BRIE",
+    "operands": "k",
+    "operation": "if(I=1) then PC\u2190PC + k + 1",
+    "description": "Branch if interrupts enabled, Same as brbs 7,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 00kk kkkk k111",
+    "example": "\u00a0brie label "
+  },
+  {
+    "command": "BRLO",
+    "operands": "k",
+    "operation": "if(C=1) then PC\u2190PC + k + 1",
+    "description": "Branch if lower, unsigned, Same as brbs 0,k and brcs",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 00kk kkkk k000",
+    "example": "\u00a0cpi r19,$8 ; compare r19 with $8<br>  <br>brlo label ; branch if r19 <<br>  $8 (unsigned) "
+  },
+  {
+    "command": "BRLT",
+    "operands": "k",
+    "operation": "if(S=1) then PC\u2190PC + k + 1",
+    "description": "Branch if less than (signed), Same as brbs 4,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 00kk kkkk k100",
+    "example": "\u00a0cpi<br>  r19,$8 ; compare r19 with $8 brlt label ; branch if r19 < $8\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<br>  ;(signed) "
+  },
+  {
+    "command": "BRMI",
+    "operands": "k",
+    "operation": "if(N=1) then PC\u2190PC + k + 1",
+    "description": "Branch if minus, Same as brbs 2,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 00kk kkkk k010",
+    "example": "subi r18,<br>  4 ; subtract 4 from r18 brmi label ; branch if result\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; negative "
+  },
+  {
+    "command": "BRNE",
+    "operands": "k",
+    "operation": "if(Z=0) then PC\u2190PC + k + 1",
+    "description": "Branch if not equal, Same as brbc 1,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 01kk kkkk k001",
+    "example": "\u00a0cpi r27, 5 ; compare r27 to 5 <br>brne label ; branch if r27 \u2260 5 "
+  },
+  {
+    "command": "BRPL",
+    "operands": "k",
+    "operation": "if(N=0) then PC\u2190PC + k + 1",
+    "description": "Branch if plus, Same as brbc 2,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 01kk kkkk k010",
+    "example": "subi r26,$50 ; subtract $50 from<br>  r26 brpl pos ; branch if result positive "
+  },
+  {
+    "command": "BRSH",
+    "operands": "k",
+    "operation": "if(C=0) then PC\u2190PC + k + 1",
+    "description": "Branch if same or higher, unsigned, Same as brbc 0,k and brcc",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 01kk kkkk k000",
+    "example": "\u00a0cp r1, r2 <br>brsh label ; branch if r1 \u2265<br>  r2\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (unsigned) "
+  },
+  {
+    "command": "BRTC",
+    "operands": "k",
+    "operation": "if(T=0) then PC\u2190PC + k + 1",
+    "description": "Branch if T flag cleared, Same as brbc 6,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 01kk kkkk k110",
+    "example": "bst r3, 5 ; store bit 5 of r3 in<br>  T brtc label; branch if bit was 0 "
+  },
+  {
+    "command": "BRTS",
+    "operands": "k",
+    "operation": "if(T=1) then PC\u2190PC + k + 1",
+    "description": "Branch if T flag set, Same as brbs 6,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 00kk kkkk k110",
+    "example": "bst r3, 5 ; store bit 5 of r3 in<br>  T brts label; branch if bit was 1 "
+  },
+  {
+    "command": "BRVC",
+    "operands": "k",
+    "operation": "if(V=0) then PC\u2190PC + k + 1",
+    "description": "Branch if overflow flag is cleared, Same as brbc 3,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 01kk kkkk k011",
+    "example": "add r3, r4\u00a0 ; add r4 to r3 <br>brvc noover ; branch if no<br>  overflow\u00a0 "
+  },
+  {
+    "command": "BRVS",
+    "operands": "k",
+    "operation": "if(V=1) then PC\u2190PC + k + 1",
+    "description": "Branch if overflow flag is set, Same as brbs 3,k",
+    "flags": "--------",
+    "cycles": "1,2*",
+    "opcode": "1111 00kk kkkk k011",
+    "example": "add r3, r4 ; add r4 to r3 brvs<br>  over\u00a0 ; branch if overflow "
+  },
+  {
+    "command": "BSET",
+    "operands": "s",
+    "operation": "SREG(s) \u21901",
+    "description": "Set bit in status register",
+    "flags": "SREG(s)",
+    "cycles": "1",
+    "opcode": "1001 0100 0sss 1000",
+    "example": "bset 6 ; set T flag "
+  },
+  {
+    "command": "BST",
+    "operands": "Rr,b",
+    "operation": "T\u2190Rr(b)",
+    "description": "Bit store from register to T",
+    "flags": "-T------",
+    "cycles": "1",
+    "opcode": "1111 101d dddd 0bbb",
+    "example": "bst r1, 2\u00a0 ; store bit 2 of r1 in<br>  T bld r0, 4\u00a0 ; load T into bit 4 of r0 "
+  },
+  {
+    "command": "CALL",
+    "operands": "k",
+    "operation": "PC\u2190k; Stack\u2190PC + 2; SP\u2190SP\u20132",
+    "description": "Direct subroutine call. 0\u2264k\u226464K",
+    "flags": "--------",
+    "cycles": "4",
+    "opcode": "1001 010k kkkk 111k kkkk kkkk kkkk kkkk",
+    "example": "call check ; call subroutine<br>  (at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; label check) "
+  },
+  {
+    "command": "CBI",
+    "operands": "P, b",
+    "operation": "IO[P](b) \u21900",
+    "description": "Clear bit in I/O register, only for 0\u2264P\u226431",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 1000 PPPP Pbbb",
+    "example": "cbi $0B, 7 ; Clear bit 7 in port<br>  D "
+  },
+  {
+    "command": "CBR",
+    "operands": "Rd, K",
+    "operation": "Rd\u2190Rd\u2022K",
+    "description": "Clear bit(s) in register, only for 16\u2264d\u226431",
+    "flags": "---SVNZ-,\n  \nV cleared",
+    "cycles": "1",
+    "opcode": "As per ANDi with K Complemented",
+    "example": "cbr r16,$F0 ; clr upper nibble of<br>  r16 cbr r18, 1\u00a0 ; clear bit 0 in r18 "
+  },
+  {
+    "command": "CLC",
+    "operands": "",
+    "operation": "C\u21900",
+    "description": "Clear carry flag, Same as bclr 0",
+    "flags": "-------C",
+    "cycles": "1",
+    "opcode": "1001 0100 1000 1000",
+    "example": "\u00a0clc "
+  },
+  {
+    "command": "CLH",
+    "operands": "",
+    "operation": "H\u21900",
+    "description": "Clear half-carry flag, Same as bclr 5",
+    "flags": "--H-----",
+    "cycles": "1",
+    "opcode": "1001 0100 1101 1000",
+    "example": "\u00a0clh "
+  },
+  {
+    "command": "CLI",
+    "operands": "",
+    "operation": "I\u21900",
+    "description": "Clear global interrupt flag (disable interrupts), Same as bclr 7",
+    "flags": "I-------",
+    "cycles": "1",
+    "opcode": "1001 0100 1111 1000",
+    "example": "\u00a0cli "
+  },
+  {
+    "command": "CLN",
+    "operands": "",
+    "operation": "N\u21900",
+    "description": "Clear negative flag, Same as bclr 2",
+    "flags": "-----N--",
+    "cycles": "1",
+    "opcode": "1001 0100 1010 1000",
+    "example": "cln "
+  },
+  {
+    "command": "CLR",
+    "operands": "Rd",
+    "operation": "Rd\u2190Rd \u2295 Rd",
+    "description": "Clear register, Same as eor Rd, Rd",
+    "flags": "---SVNZ-,\n  \nZ set; S,V,N cleared",
+    "cycles": "1",
+    "opcode": "0010 01Dd dddd DDDD (DDDDD=ddddd)",
+    "example": "clr r18 ; clear r18 "
+  },
+  {
+    "command": "CLS",
+    "operands": "",
+    "operation": "S\u21900",
+    "description": "Clear signed flag, Same as bclr 4",
+    "flags": "---S----",
+    "cycles": "1",
+    "opcode": "1001 0100 1100 1000",
+    "example": "cls "
+  },
+  {
+    "command": "CLT",
+    "operands": "",
+    "operation": "T\u21900",
+    "description": "Clear T flag, Same as bclr 6",
+    "flags": "-T------",
+    "cycles": "1",
+    "opcode": "1001 0100 1110 1000",
+    "example": "clt "
+  },
+  {
+    "command": "CLV",
+    "operands": "",
+    "operation": "V\u21900",
+    "description": "Clear overflow flag, Same as bclr 3",
+    "flags": "----V---",
+    "cycles": "1",
+    "opcode": "1001 0100 1011 1000",
+    "example": "clv "
+  },
+  {
+    "command": "CLZ",
+    "operands": "",
+    "operation": "Z\u21900",
+    "description": "Clear zero flag, Same as bclr 1",
+    "flags": "------Z-",
+    "cycles": "1",
+    "opcode": "1001 0100 1001 1000",
+    "example": "clz "
+  },
+  {
+    "command": "COM",
+    "operands": "Rd",
+    "operation": "Rd\u2190Rd or Rd\u2190$FF \u2013 Rd",
+    "description": "One\u2019s complement (inversion)",
+    "flags": "---SVNZC,\n  \nV cleared,\u00a0 \nC set",
+    "cycles": "1",
+    "opcode": "1001 010d dddd 0000",
+    "example": "com r4 ; invert bits in r4 "
+  },
+  {
+    "command": "CP",
+    "operands": "Rd, Rr",
+    "operation": "Rd \u2013 Rr",
+    "description": "Compare",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0001 01rd dddd rrrr",
+    "example": "cp r4, r19 ; compare r4 with r19<br>  brne noteq ; branch if r4 \u2260 r19 "
+  },
+  {
+    "command": "CPC",
+    "operands": "Rd,Rr",
+    "operation": "Rd \u2013 Rr \u2013 C",
+    "description": "Compare with Carry",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0000 01rd dddd rrrr",
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; compare r3:r2 with<br>  r1:r0 cp r2, r0\u00a0 ; compare low byte cpc r3, r1 ; compare high byte brne noteq<br>  ; branch if not equal "
+  },
+  {
+    "command": "CPI",
+    "operands": "Rd, K",
+    "operation": "Rd \u2013 K",
+    "description": "Compare with immediate, 16\u2264 d \u2264 31",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0011 KKKK dddd KKKK",
+    "example": "cpi r19, 3 ; compare r19 with 3<br>  brne error ; branch if r19 \u2260 3 "
+  },
+  {
+    "command": "CPSE",
+    "operands": "Rd,Rr",
+    "operation": "if(Rd=Rr) PC\u2190PC + 2 (or 3)",
+    "description": "Compare, skip if equal.",
+    "flags": "--------",
+    "cycles": "1,2,\n3\u2020",
+    "opcode": "0001 00rd dddd rrrr",
+    "example": "cpse r4,r0 ; compare r4 to r0 neg<br>  r4\u00a0\u00a0\u00a0\u00a0 ; only executed if r4 \u2260 r0<br>  ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue here "
+  },
+  {
+    "command": "DEC",
+    "operands": "Rd",
+    "operation": "Rd\u2190Rd \u2013 1",
+    "description": "Decrement register",
+    "flags": "---SVNZ-",
+    "cycles": "1",
+    "opcode": "1001 010d dddd 1010",
+    "example": "dec r17 "
+  },
+  {
+    "command": "EOR",
+    "operands": "Rd,Rr",
+    "operation": "Rd\u2190Rd \u2295 Rr",
+    "description": "Exclusive OR two registers",
+    "flags": "---SVNZ-,\n  \nV cleared",
+    "cycles": "1",
+    "opcode": "0010 01rd dddd rrrr",
+    "example": "eor r0, r22 ; bitwise exclusive<br>  or "
+  },
+  {
+    "command": "FMUL",
+    "operands": "Rd, Rr",
+    "operation": "R1:R0 \u2190 Rd x Rr",
+    "description": "Multiply unsigned 1.7 fractional number by another. 16 \u2264 d \u2264 23, 16 \u2264 r \u2264 23",
+    "flags": "------ZC",
+    "cycles": "2",
+    "opcode": "0000 0011 0ddd 1rrr",
+    "example": "fmul r23, r24 "
+  },
+  {
+    "command": "FMULS",
+    "operands": "Rd, Rr",
+    "operation": "R1:R0 \u2190 Rd x Rr",
+    "description": "Multiply signed 1.7 fractional number by another. 16 \u2264 d \u2264 23, 16 \u2264 r \u2264 23",
+    "flags": "------ZC",
+    "cycles": "2",
+    "opcode": "0000 0011 1ddd 0rrr",
+    "example": "fmuls r21, r20 "
+  },
+  {
+    "command": "FMULSU",
+    "operands": "Rd, Rr",
+    "operation": "R1:R0 \u2190 Rd x Rr",
+    "description": "Multiply 1.7 fractional signed number (Rd) by 1.7 fractional unsigned number (Rr). 16 \u2264 d \u2264 23, 16 \u2264 r \u2264 23",
+    "flags": "------ZC",
+    "cycles": "2",
+    "opcode": "0000 0011 1ddd 1rrr",
+    "example": "fmulsu r21, r20 "
+  },
+  {
+    "command": "ICALL",
+    "operands": "",
+    "operation": "PC\u2190Z; Stack\u2190PC + 1; SP\u2190SP\u20132",
+    "description": "Indirect call to [Z] (High bits of Z discarded)",
+    "flags": "--------",
+    "cycles": "3",
+    "opcode": "1001 0101 0000 1001",
+    "example": "...\u00a0\u00a0 ; put value in Z (ZH:ZL)<br>  icall ; call routine pointed to by Z "
+  },
+  {
+    "command": "IJMP",
+    "operands": "",
+    "operation": "PC\u2190Z",
+    "description": "Indirect Jump to [Z] (High bits of Z discarded)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 0100 0000 1001",
+    "example": "...\u00a0\u00a0 ; put value in Z (ZH:ZL) ijmp\u00a0<br>  ; jump to code at address Z "
+  },
+  {
+    "command": "IN",
+    "operands": "Rd, P",
+    "operation": "Rd\u2190IO[P]",
+    "description": "Load an I/O Location to Register",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "1011 0PPd dddd PPPP",
+    "example": "in r25, $05 ; read port B "
+  },
+  {
+    "command": "INC",
+    "operands": "Rd",
+    "operation": "Rd\u2190Rd + 1",
+    "description": "Increment register",
+    "flags": "---SVNZ-",
+    "cycles": "1",
+    "opcode": "1001 010d dddd 0011",
+    "example": "inc r22 "
+  },
+  {
+    "command": "JMP",
+    "operands": "k",
+    "operation": "PC \u2190 k",
+    "description": "Jump to address anywhere in program memory. (0 \u2264 k \u2264 4M)",
+    "flags": "--------",
+    "cycles": "3",
+    "opcode": "1001 010k kkkk 110k kkkk kkkk kkkk kkkk",
+    "example": "jmp label\u00a0\u00a0 ; jump to label "
+  },
+  {
+    "command": "LD",
+    "operands": "Rd, W",
+    "operation": "Rd\u2190M[W]",
+    "description": "Load Indirect (Y or Z case)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1000 000d dddd W000",
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+  },
+  {
+    "command": "LD",
+    "operands": "Rd, X",
+    "operation": "Rd\u2190M[X]",
+    "description": "Load Indirect (X case)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 000d dddd 1100",
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+  },
+  {
+    "command": "LDD",
+    "operands": "Rd,W+\nq",
+    "operation": "Rd\u2190M[W+q]",
+    "description": "Load Indirect with Displacement (Y or Z only)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "10q0 qq0d dddd Wqqq",
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+  },
+  {
+    "command": "LD",
+    "operands": "Rd,\n  W+",
+    "operation": "Rd\u2190M[W]; W\u2190W+1",
+    "description": "Load Indirect with Postincrement (Y or Z)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 000d dddd W001",
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+  },
+  {
+    "command": "LD",
+    "operands": "Rd,\n  X+",
+    "operation": "Rd\u2190M[X]; X\u2190X+1",
+    "description": "Load Indirect with Postincrement (X)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 000d dddd 1101",
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+  },
+  {
+    "command": "LD",
+    "operands": "Rd,\n  -W",
+    "operation": "W\u2190W-1; Rd\u2190M[W]",
+    "description": "Load Indirect with Pre-decrement (Y or Z)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 000d dddd W010",
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+  },
+  {
+    "command": "LD",
+    "operands": "Rd, -X",
+    "operation": "X\u2190X-1; Rd\u2190M[X]",
+    "description": "Load Indirect with Pre-decrement (X)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 000d dddd 1110",
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+  },
+  {
+    "command": "LDI",
+    "operands": "Rd,\n  K",
+    "operation": "Rd\u2190K",
+    "description": "Load Immediate, 16 \u2264 d \u2264 31",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "1110 KKKK dddd KKKK",
+    "example": "ldi r30, $F0 ; set Z low byte to<br>  $F0 "
+  },
+  {
+    "command": "LDS",
+    "operands": "Rd,\n  k",
+    "operation": "Rd\u2190M[k]",
+    "description": "Load Direct from SRAM, 0\u2264k\u226465535",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 000d dddd 0000 kkkk kkkk kkkk kkkk",
+    "example": "lds r2,<br>  $FF00 ;load r2 with contents\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ;of mem. location $FF00"
+  },
+  {
+    "command": "LPM",
+    "operands": "",
+    "operation": "R0\u2190PM[Z]",
+    "description": "Load program memory, Z contains a byte address. Least significant bit of Z selects low byte of the program word (if 0) or high byte (if 1)",
+    "flags": "--------",
+    "cycles": "3",
+    "opcode": "1001 0101 1100 1000",
+    "example": "ldi ZH,<br>  high(table << 1); init. Z ldi ZL, low(table*2) lpm r16, Z ;load const<br>  from prog mem.<br>... table:<br>  <br>.dw 0x5876 ; $76 at prog. memory<br>  byte<br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<br>  ; address table*2 "
+  },
+  {
+    "command": "LPM",
+    "operands": "Rd,\n  Z",
+    "operation": "Rd\u2190PM[Z]",
+    "description": "As above, destination is Rd",
+    "flags": "--------",
+    "cycles": "3",
+    "opcode": "1001 000d dddd 0100",
+    "example": "\u00a0"
+  },
+  {
+    "command": "LPM",
+    "operands": "Rd, Z+",
+    "operation": "R0\u2190PM[Z] Z\u2190Z+1",
+    "description": "As above, destination is Rd. Z is incremented",
+    "flags": "--------",
+    "cycles": "3",
+    "opcode": "1001 000d dddd 0100",
+    "example": "\u00a0"
+  },
+  {
+    "command": "LSL",
+    "operands": "Rd",
+    "operation": "C\u2190Rd(7); Rd(7\u20261) \u2190Rd(6\u20260); Rd(0) \u21900",
+    "description": "Logical Shift Left, Same as add Rd,Rd",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0000 11Dd dddd DDDD (DDDDD=ddddd)",
+    "example": "lsl r0 ;<br>  multiply r0 by 2 "
+  },
+  {
+    "command": "LSR",
+    "operands": "Rd",
+    "operation": "C\u2190Rd(0); Rd(6\u20260) \u2190Rd(7\u20261); Rd(7) \u21900",
+    "description": "Logical Shift Right",
+    "flags": "---SVNZC, \nN\u21900",
+    "cycles": "1",
+    "opcode": "1001 010d dddd 0110",
+    "example": "lsr r0 ; divide r0 by 2,\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<br>  ; remainder in C "
+  },
+  {
+    "command": "MOV",
+    "operands": "Rd,\n  Rr",
+    "operation": "Rd\u2190Rr",
+    "description": "Move between registers",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "0010 11rd dddd rrrr",
+    "example": "mov r16,<br>  r0 ; copy r0 to r16 "
+  },
+  {
+    "command": "MOVW",
+    "operands": "Rd,\n  Rr",
+    "operation": "Rd+1:Rd\u2190 Rr+1:Rr",
+    "description": "Copy one register pair to another. d=0,2,4\u202630; r=0,2,4\u202630",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "0000 0001 dddd rrrr",
+    "example": "movw<br>  r17:r16, r1:r0 "
+  },
+  {
+    "command": "MUL",
+    "operands": "Rd,\n  Rr",
+    "operation": "R1:R0 \u2190 Rd x Rr",
+    "description": "Multiply two 8-bit unsigned numbers. (Unsigned result)",
+    "flags": "------ZC",
+    "cycles": "2",
+    "opcode": "1001 11rd dddd rrrr",
+    "example": "mul r5, r4<br>  "
+  },
+  {
+    "command": "MULS",
+    "operands": "Rd,\n  Rr",
+    "operation": "R1:R0 \u2190 Rd x Rr",
+    "description": "Multiply two 8-bit signed numbers. 16 \u2264 d \u2264 31, 16 \u2264 r \u2264 31",
+    "flags": "------ZC",
+    "cycles": "2",
+    "opcode": "0000 0010 dddd rrrr",
+    "example": "muls r21,<br>  r20 "
+  },
+  {
+    "command": "MULSU",
+    "operands": "Rd,\n  Rr",
+    "operation": "R1:R0 \u2190 Rd x Rr",
+    "description": "Multiply 8-bit signed number (Rd) by 8-bit unsigned number (Rr). 16 \u2264 d \u2264 23, 16 \u2264 r \u2264 23",
+    "flags": "------ZC",
+    "cycles": "2",
+    "opcode": "0000 0011 0ddd 0rrr",
+    "example": "mulsu r21,<br>  r20 "
+  },
+  {
+    "command": "NEG",
+    "operands": "Rd",
+    "operation": "Rd\u2190$00 \u2013 Rd",
+    "description": "Two\u2019s complement (negation)",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "1001 010d dddd 0001",
+    "example": "neg r11 ;<br>  negate value in r11 "
+  },
+  {
+    "command": "NOP",
+    "operands": "",
+    "operation": "",
+    "description": "No operation",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "0000 0000 0000 0000",
+    "example": "nop ; do<br>  nothing for 1 clock cycle "
+  },
+  {
+    "command": "OR",
+    "operands": "Rd,Rr",
+    "operation": "Rd\u2190Rd or Rr",
+    "description": "Logical OR two registers",
+    "flags": "---SVNZ-, \nV\n  cleared",
+    "cycles": "1",
+    "opcode": "0010 10rd dddd rrrr",
+    "example": "ldi r16, 3<br>  <br>or r2, r16\u00a0\u00a0 ; set bits 0 and 1<br>  of r2"
+  },
+  {
+    "command": "ORI",
+    "operands": "Rd,\n  K",
+    "operation": "Rd\u2190Rd or K",
+    "description": "Logical OR with immediate, 16 \u2264 d \u2264 31",
+    "flags": "---SVNZ-, \nV\n  cleared",
+    "cycles": "1",
+    "opcode": "0110 KKKK dddd KKKK",
+    "example": "ori r17, $0F; set bits 0,1,2,3 of<br>  r17"
+  },
+  {
+    "command": "OUT",
+    "operands": "P,\n  Rr",
+    "operation": "IO[P] \u2190Rr",
+    "description": "Store Register to I/O Location",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "1011 1PPr rrrr PPPP",
+    "example": "clr r16 ;<br>  clear r16 <br>out $05, r16 ; write zeroes to<br>  port B"
+  },
+  {
+    "command": "POP",
+    "operands": "Rd",
+    "operation": "SP\u2190SP+1; Rd\u2190STACK",
+    "description": "Pop register from stack",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 000d dddd 1111",
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save<br>  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff<br>  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore<br>  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
+  },
+  {
+    "command": "PUSH",
+    "operands": "Rr",
+    "operation": "STACK\u2190Rr; SP\u2190SP\u20131",
+    "description": "Push register on Stack",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 001r rrrr 1111",
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save<br>  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff<br>  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore<br>  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
+  },
+  {
+    "command": "RCALL",
+    "operands": "k",
+    "operation": "PC\u2190PC + k + 1; Stack\u2190PC + 1; SP\u2190SP\u20132",
+    "description": "Relative Subroutine Call, -2048 \u2264 k \u2264 2047",
+    "flags": "--------",
+    "cycles": "3",
+    "opcode": "1101 kkkk kkkk kkkk",
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save<br>  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff<br>  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore<br>  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
+  },
+  {
+    "command": "RET",
+    "operands": "",
+    "operation": "SP\u2190SP+2; PC\u2190Stack",
+    "description": "Subroutine return",
+    "flags": "--------",
+    "cycles": "4",
+    "opcode": "1001 0101 0000 1000",
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save<br>  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff<br>  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore<br>  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
+  },
+  {
+    "command": "RETI",
+    "operands": "",
+    "operation": "SP\u2190SP+2; PC\u2190Stack",
+    "description": "Return from interrupt (and enable interrupts)",
+    "flags": "I-------, \nI\n  is set",
+    "cycles": "4",
+    "opcode": "1001 0101 0001 1000",
+    "example": "int_handler:<br>  push r0\u00a0\u00a0\u00a0\u00a0 ...\u00a0\u00a0\u00a0\u00a0 pop r0 <br>\u00a0\u00a0\u00a0 reti ;<br>  return and enable interrupts "
+  },
+  {
+    "command": "RJMP",
+    "operands": "k",
+    "operation": "PC\u2190PC + k + 1;",
+    "description": "Relative Jump, -2048 <= k <= 2047",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1100 kkkk kkkk kkkk",
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rjmp RESET\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... <br>RESET: ...<br>  "
+  },
+  {
+    "command": "ROL",
+    "operands": "Rd",
+    "operation": "C\u2190Rd(7); Rd(7\u20261) \u2190Rd(6\u20260); Rd(0) \u2190C",
+    "description": "Rotate left through carry, Same as adc Rd,Rd",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0001 11Dd dddd DDDD (DDDDD=ddddd)",
+    "example": "\u00a0\u00a0\u00a0 ; multiply r19:r18 by 2 lsl<br>  r18 rol r19 "
+  },
+  {
+    "command": "ROR",
+    "operands": "Rd",
+    "operation": "C\u2190Rd(0); Rd(6\u20260) \u2190Rd(7\u20261); Rd(7) \u2190C",
+    "description": "Rotate right through carry",
+    "flags": "---SVNZC",
+    "cycles": "1",
+    "opcode": "1001 010d dddd 0111",
+    "example": "\u00a0\u00a0 ; divide r17:r16 (signed) by 2<br>  asr r17 ror r16 "
+  },
+  {
+    "command": "SBC",
+    "operands": "Rd,\n  Rr",
+    "operation": "Rd\u2190Rd \u2013 Rr \u2013 C",
+    "description": "Subtract two registers with carry",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0000 10rd dddd rrrr",
+    "example": "\u00a0\u00a0 ; subtract r1:r0 from r3:r2<br>  sub r2, r0 ; subtract low byte sbc r3,r1 ; subtract high byte "
+  },
+  {
+    "command": "SBCI",
+    "operands": "Rd,\n  K",
+    "operation": "Rd\u2190Rd \u2013 K \u2013 C",
+    "description": "Subtract immediate with carry, 16 \u2264 d \u2264 31",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0100 KKKK dddd KKKK",
+    "example": "\u00a0\u00a0 ; subtract $4F23 from r17:r16<br>  subi r16, $23 ; subtract low byte sbci r17, $4F ; sub. w/ carry hi byte"
+  },
+  {
+    "command": "SBI",
+    "operands": "P,\n  b",
+    "operation": "IO[P](b) \u21901",
+    "description": "Set bit in I/O register, 0<=P<=31",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 1010 PPPP Pbbb",
+    "example": "sbi $0B, 7<br>  ; Set bit 7 in port D "
+  },
+  {
+    "command": "SBIC",
+    "operands": "P, b",
+    "operation": "if(IO[P](b) = 0) PC\u2190PC + 2 (or 3)",
+    "description": "Skip if bit in I/O register is cleared, 0<=P<=31",
+    "flags": "--------",
+    "cycles": "1,2,\n3\u2020",
+    "opcode": "1001 1001 PPPP Pbbb",
+    "example": "\u00a0\u00a0 ; wait<br>  until bit 3 of port D is 0 wait: sbic $0B, 3 <br>\u00a0\u00a0\u00a0\u00a0\u00a0 rjmp<br>  wait ; if bit set, wait\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
+  },
+  {
+    "command": "SBIS",
+    "operands": "P, b",
+    "operation": "if(IO[P](b) = 1) PC\u2190PC + 2 (or 3)",
+    "description": "Skip if bit in I/O register is set, 0<=P<=31",
+    "flags": "--------",
+    "cycles": "1,2,\n3\u2020",
+    "opcode": "1001 1011 PPPP Pbbb",
+    "example": "\u00a0\u00a0 ; wait<br>  until bit 4 of port B is 1 wait: sbis $05, 4 <br>\u00a0\u00a0\u00a0\u00a0\u00a0 rjmp<br>  wait; if bit cleared, wait\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
+  },
+  {
+    "command": "SBIW",
+    "operands": "Rh:Rl, K",
+    "operation": "Rh:Rl\u2190Rh:Rl\u2013K",
+    "description": "Subtract immediate from word, 0 \u2264 K \u2264 63",
+    "flags": "---SVNZC",
+    "cycles": "2",
+    "opcode": "1001 0111 KKdd KKKK",
+    "example": "sbiw r25:r24,1; sub. 1 from<br>  r25:r24 sbiw YH:YL,63 ; subtract 63 from Y "
+  },
+  {
+    "command": "SBR",
+    "operands": "Rd, K",
+    "operation": "Rd\u2190Rd or K",
+    "description": "Set bit(s) in register, 16 \u2264 d \u2264 31, same as ori",
+    "flags": "---SVNZ-,\n  \nV cleared",
+    "cycles": "1",
+    "opcode": "0110 KKKK dddd KKKK",
+    "example": "\u00a0sbr r16,<br>  3\u00a0 ; set bits 0 and 1 in r16"
+  },
+  {
+    "command": "SBRC",
+    "operands": "Rr, b",
+    "operation": "if(Rr(b) = 0) PC\u2190PC + 2 (or 3)",
+    "description": "Skip if bit in register is cleared",
+    "flags": "--------",
+    "cycles": "1,2,\n3\u2020",
+    "opcode": "1111 110r rrrr 0bbb",
+    "example": "\u00a0\u00a0 ; r0 <- absolute value (r0)<br>  sbrc r0, 7 ; skip if bit 7 of r0 is 0 neg r0\u00a0\u00a0\u00a0\u00a0 ; negate r0 (if r0(7) = 1)<br>  ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
+  },
+  {
+    "command": "SBRS",
+    "operands": "Rr, b",
+    "operation": "if(Rr(b) = 1) PC\u2190PC + 2 (or 3)",
+    "description": "Skip if bit in register is set",
+    "flags": "--------",
+    "cycles": "1,2,\n3\u2020",
+    "opcode": "1111 111r rrrr 0bbb",
+    "example": "sbrs r0, 6 ; skip if bit 6 of r0<br>  is 1 sub r2, r3 ; only if r0(6) = 0 ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
+  },
+  {
+    "command": "SEC",
+    "operands": "",
+    "operation": "C\u21901",
+    "description": "Set carry flag, Same as bset 0",
+    "flags": "-------C",
+    "cycles": "1",
+    "opcode": "1001 0100 0000 1000",
+    "example": "\u00a0sec "
+  },
+  {
+    "command": "SEH",
+    "operands": "",
+    "operation": "H\u21901",
+    "description": "Set half-carry flag, Same as bset 5",
+    "flags": "--H-----",
+    "cycles": "1",
+    "opcode": "1001 0100 0101 1000",
+    "example": "\u00a0seh "
+  },
+  {
+    "command": "SEI",
+    "operands": "",
+    "operation": "I\u21901",
+    "description": "Set global interrupt flag (enable interrupts). Instruction following sei will always be executed before any pending interrupts are handled. Same as bset 7",
+    "flags": "I-------",
+    "cycles": "1",
+    "opcode": "1001 0100 0111 1000",
+    "example": "\u00a0sei ; enable interrupts "
+  },
+  {
+    "command": "SEN",
+    "operands": "",
+    "operation": "N\u21901",
+    "description": "Set negative flag, Same as bset 2",
+    "flags": "-----N--",
+    "cycles": "1",
+    "opcode": "1001 0100 0010 1000",
+    "example": "\u00a0sen "
+  },
+  {
+    "command": "SER",
+    "operands": "Rd",
+    "operation": "Rd\u2190$FF",
+    "description": "Set register, 16 \u2264 d \u2264 31, Same as LDI Rd, $FF",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "1110 1111 dddd 1111",
+    "example": "\u00a0ser r16\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; set r16 (all<br>  ones) <br>out $04,<br>  r16\u00a0 ; make port B an output"
+  },
+  {
+    "command": "SES",
+    "operands": "",
+    "operation": "S\u21901",
+    "description": "Set signed flag, Same as bset 4",
+    "flags": "---S----",
+    "cycles": "1",
+    "opcode": "1001 0100 0100 1000",
+    "example": "\u00a0ses "
+  },
+  {
+    "command": "SET",
+    "operands": "",
+    "operation": "T\u21901",
+    "description": "Set T flag, Same as bset 6",
+    "flags": "-T------",
+    "cycles": "1",
+    "opcode": "1001 0100 0110 1000",
+    "example": "\u00a0set "
+  },
+  {
+    "command": "SEV",
+    "operands": "",
+    "operation": "V\u21901",
+    "description": "Set overflow flag, Same as bset 3",
+    "flags": "----V---",
+    "cycles": "1",
+    "opcode": "1001 0100 0011 1000",
+    "example": "\u00a0sev "
+  },
+  {
+    "command": "SEZ",
+    "operands": "",
+    "operation": "Z\u21901",
+    "description": "Set zero flag, Same as bset 1",
+    "flags": "------Z-",
+    "cycles": "1",
+    "opcode": "1001 0100 0001 1000",
+    "example": "sez "
+  },
+  {
+    "command": "SLEEP",
+    "operands": "",
+    "operation": "",
+    "description": "Sleep. Sets CPU in sleep mode defined by the MCU control register",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "1001 0101 1000 1000",
+    "example": "sleep "
+  },
+  {
+    "command": "SPM",
+    "operands": "",
+    "operation": "PM[Z] \u2190R1:R0",
+    "description": "Store program memory \u2013 see instruction reference manual for details.",
+    "flags": "--------",
+    "cycles": "Varies",
+    "opcode": "1001 0101 1110 1000",
+    "example": "\u00a0"
+  },
+  {
+    "command": "ST",
+    "operands": "W, Rr",
+    "operation": "M[W] \u2190Rr",
+    "description": "Store Indirect (Y or Z cases)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1000 001r rrrr W000",
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+  },
+  {
+    "command": "ST",
+    "operands": "X, Rr",
+    "operation": "M[X] \u2190Rr",
+    "description": "Store Indirect (X case)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 001r rrrr 1100",
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+  },
+  {
+    "command": "ST",
+    "operands": "W+,\n  Rr",
+    "operation": "M[W] \u2190Rr; W\u2190W+1",
+    "description": "Store Indirect with Postincrement (Y or Z)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 001r rrrr W001",
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+  },
+  {
+    "command": "ST",
+    "operands": "X+,\n  Rr",
+    "operation": "M[X] \u2190Rr; X\u2190X+1",
+    "description": "Store Indirect with Postincrement (X)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 001r rrrr 1101",
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+  },
+  {
+    "command": "ST",
+    "operands": "-W,\n  Rr",
+    "operation": "W\u2190W-1; M[W] \u2190Rr",
+    "description": "Store Indirect with Pre-decrement (Y or Z)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 001r rrrr W010",
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+  },
+  {
+    "command": "ST",
+    "operands": "-X, Rr",
+    "operation": "X\u2190X-1; M[X] \u2190Rr",
+    "description": "Store Indirect with Pre-decrement (X)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 001r rrrr 1110",
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+  },
+  {
+    "command": "STD",
+    "operands": "W+q,Rr",
+    "operation": "M[W+q] \u2190Rr",
+    "description": "Store Indirect with Displacement (Y or Z only)",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "10q0 qq1r rrrr Wqqq",
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+  },
+  {
+    "command": "STS",
+    "operands": "k, Rr",
+    "operation": "M[k] \u2190Rr",
+    "description": "Store Direct To SRAM",
+    "flags": "--------",
+    "cycles": "2",
+    "opcode": "1001 001r rrrr 0000 kkkk kkkk kkkk kkkk",
+    "example": "lds r2,<br>  $FF00 ; load r2 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $FF00 add r2,<br>  r1\u00a0\u00a0\u00a0 ; add r1 to r2 sts $FF00, r2 ; Write back "
+  },
+  {
+    "command": "SUB",
+    "operands": "Rd, Rr",
+    "operation": "Rd\u2190Rd - Rr",
+    "description": "Subtract two registers",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0001 10rd dddd rrrr",
+    "example": "sub r13,<br>  r12\u00a0 ; subtract r12 from r13"
+  },
+  {
+    "command": "SUBI",
+    "operands": "Rd, K",
+    "operation": "Rd\u2190Rd \u2013 K",
+    "description": "Subtract immediate, 16 \u2264 d \u2264 31",
+    "flags": "--HSVNZC",
+    "cycles": "1",
+    "opcode": "0101 KKKK dddd KKKK",
+    "example": "subi r22,<br>  $11 ; subtract $11 from r22"
+  },
+  {
+    "command": "SWAP",
+    "operands": "Rd",
+    "operation": "Rd(7\u20264) \u2190Rd(3\u20260); Rd(3\u20260) \u2190Rd(7\u20264)",
+    "description": "Swap nibbles (i.e. high 4 bits is exchanged with low 4 bits)",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "1001 010d dddd 0010",
+    "example": "swap r1 ; swap high and low<br>  nibbles\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; of r1 "
+  },
+  {
+    "command": "TST",
+    "operands": "Rd",
+    "operation": "Rd\u2190Rd \u2022 Rd",
+    "description": "Test for zero or minus, same as And Rd, Rd",
+    "flags": "---SVNZ-,\n  \nV cleared",
+    "cycles": "1",
+    "opcode": "0010 00Dd dddd DDDD (DDDDD=ddddd)",
+    "example": "tst r0\u00a0\u00a0\u00a0\u00a0 ; test r0 breq label ;<br>  branch if r0 = 0 "
+  },
+  {
+    "command": "WDR",
+    "operands": "",
+    "operation": "",
+    "description": "Watchdog reset",
+    "flags": "--------",
+    "cycles": "1",
+    "opcode": "1001 0101 1010 1000",
+    "example": "wdr ; reset watchdog timer "
+  }
+]

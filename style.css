@@ -1,0 +1,62 @@
+.hidden {
+    display: none;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+#tabs {
+    margin: 20px 0;
+}
+
+
+.tab-link {
+    cursor: pointer;
+    background: #eeeeee;
+    padding: 5px;
+}
+
+.selected {
+    border-style: solid;
+    border-color: #222222;
+}
+
+input {
+    padding: 5px;
+}
+
+/* Tables */
+
+table {
+    margin: 10px 0;
+    font-family: 'Consolas', monospace;
+}
+
+table, td {
+    border-style: solid;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #eeeeee;
+}
+
+tbody {
+    font-size: 80%;
+}
+
+td {
+    vertical-align: top;
+    padding: 4px;
+}
+
+#instructions .description {
+    width: 50ch;
+}
+#instructions .opcode {
+    width: 20ch;
+}
+#instructions .example {
+    width: 37ch;
+}

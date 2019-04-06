@@ -1,0 +1,66 @@
+[
+  {
+    "notation": "M[a]",
+    "meaning": "Memory (SRAM) cell at address a"
+  },
+  {
+    "notation": "PM[a]",
+    "meaning": "Program Memory (Flash) cell at byte address a"
+  },
+  {
+    "notation": "IO[a]",
+    "meaning": "I/O register a"
+  },
+  {
+    "notation": "PC",
+    "meaning": "Program Counter"
+  },
+  {
+    "notation": "SP",
+    "meaning": "Stack Pointer"
+  },
+  {
+    "notation": "STACK",
+    "meaning": "M[SP]"
+  },
+  {
+    "notation": "\u2190",
+    "meaning": "Assigned value"
+  },
+  {
+    "notation": "reg(a)",
+    "meaning": "Bit a of register reg (numbered 7\u20260, most significant to least significant)"
+  },
+  {
+    "notation": "C",
+    "meaning": "Carry bit in status register, same as SREG(0)"
+  },
+  {
+    "notation": "Z",
+    "meaning": "Zero bit in status register, same as SREG(1)"
+  },
+  {
+    "notation": "N",
+    "meaning": "Negative bit in status register, same as SREG(2)"
+  },
+  {
+    "notation": "V",
+    "meaning": "Overflow bit in status register, same as SREG(3)"
+  },
+  {
+    "notation": "S",
+    "meaning": "N\u2295V bit in status register, same as SREG(4). S = sign of result corrected for any overflow. (Means result is negative (with no overflow) or would have been negative if overflow hadn\u2019t occurred.)"
+  },
+  {
+    "notation": "H",
+    "meaning": "Half-carry bit in status register, same as SREG(5)"
+  },
+  {
+    "notation": "T",
+    "meaning": "Transfer bit in status register, same as SREG(6) (see BLD, BST)"
+  },
+  {
+    "notation": "I",
+    "meaning": "Global Interrupt Enable bit in status register, same as SREG(7)"
+  }
+]

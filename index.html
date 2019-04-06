@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>AVR Microcontroller Instructions</title>
+        <script src="lib/list.min.js"></script>
+        <script src="lib/lodash.min.js"></script>
+        <script src="main.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="favicon" href="favicon.ico">
+    </head>
+    <body>
+        <div id="tabs">
+            <span class="tab-link" data-tab="instructions">Instructions</span>
+            <span class="tab-link" data-tab="operands">Operands</span>
+            <span class="tab-link" data-tab="notations">Notation</span>
+        </div>
+        
+        <div id="instructions">
+            <input class="search-command" placeholder="Search commands" />
+            <input class="search" placeholder="Search all" />
+            <!-- <button class="sort" data-sort="name">
+              Sort
+            </button> -->
+          
+            <table>
+                <thead><tr><td>Command</td><td>Operands</td><td>Operation</td><td>Description</td><td>Flags</td><td>Cycles</td><td>Opcode</td><td>Example</td></tr></thead>
+                <tbody class="list">
+                </tbody>
+            </table>
+          </div>
+
+          <div id="operands">
+            <table>
+                <thead><tr>
+                    <td>Operand</td>
+                    <td>Meaning</td>
+                    <td>Values</td>
+                    <td>Pattern</td>
+                </tr></thead>
+                <tbody class="list">
+                </tbody>
+            </table>
+          </div>
+
+          <div id="notations">
+                <table>
+                    <thead><tr>
+                        <td>Notation</td>
+                        <td>Meaning</td>
+                    </tr></thead>
+                    <tbody class="list">
+                    </tbody>
+                </table>
+              </div>
+    </body>
+</html>

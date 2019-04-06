@@ -1,0 +1,62 @@
+[
+  {
+    "operand": "Rd",
+    "meaning": "Destination register (could be source also)",
+    "values": "r0\u2026r31<br>r16\u2026r31",
+    "pattern": "ddddd<br>dddd (register number \u2013 16)"
+  },
+  {
+    "operand": "Rr",
+    "meaning": "Source register",
+    "values": "r0\u2026r31",
+    "pattern": "rrrrr"
+  },
+  {
+    "operand": "Rh:Rl",
+    "meaning": "Pair of registers treated as 16 bit quantity",
+    "values": "r25:r24<br>r27:r26 (or XH:XL)<br>r29:r28 (or YH:YL)<br>r31:r30 (or ZH:ZL)",
+    "pattern": "dd (00)<br>dd (01)<br>dd (10)<br>dd (11)"
+  },
+  {
+    "operand": "K",
+    "meaning": "Constant data",
+    "values": "0\u2026255 ($00 to $FF)<br>0\u202663 ($00 to $3F)",
+    "pattern": "KKKKKKKK<br>KKKKKK"
+  },
+  {
+    "operand": "k",
+    "meaning": "Constant address",
+    "values": "-64\u202663<br>-2048\u20262047<br>0\u202665535",
+    "pattern": "kkkkkkk<br>kkkk kkkk kkkk<br>kkkk kkkk kkkk kkkk"
+  },
+  {
+    "operand": "b",
+    "meaning": "Bit number in register (or I/O register)",
+    "values": "0\u20267",
+    "pattern": "bbb"
+  },
+  {
+    "operand": "s",
+    "meaning": "Bit in status register",
+    "values": "0\u20267",
+    "pattern": "sss"
+  },
+  {
+    "operand": "W",
+    "meaning": "Y or Z register",
+    "values": "Y or Z",
+    "pattern": "W (1 for Y, 0 for Z)"
+  },
+  {
+    "operand": "P",
+    "meaning": "I/O register number",
+    "values": "0\u202663 ($00 to $3F)<br>0\u202631($00 to $1F)",
+    "pattern": "PPPPPP<br>PPPPP"
+  },
+  {
+    "operand": "q",
+    "meaning": "Displacement for direct addressing",
+    "values": "0\u202663",
+    "pattern": "qqqqqq"
+  }
+]
