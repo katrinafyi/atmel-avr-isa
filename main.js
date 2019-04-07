@@ -42,7 +42,7 @@ function main() {
   };
 
   const escapeRow = row => {
-    Object.keys(row).forEach(key => row[key] = _.escape(row[key]));
+    Object.keys(row).forEach(key => row[key] = _.escape(row[key]).replace(/\n/g, '<br>'));
     return row;
   };
 
@@ -58,6 +58,8 @@ function main() {
     fetch(`data/${t}.json`)
     .then(resp => resp.json())
     .then(json => list.add(json.map(escapeRow).map(process)));
+
+    return list;
   });
 
   let searchCmdBox = document.querySelector('input.search-command');
@@ -70,4 +72,4 @@ function main() {
   showTab(document.querySelector('.tab-link[data-tab=instructions]'));
 }
 
-window.addEventListener('load', main);
+window.addEventListener('DOMContentLoaded', main);
