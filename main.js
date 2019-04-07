@@ -21,44 +21,49 @@ function main() {
 
   const makeRowTemplate = (columns) => '<tr>' + columns.map(x => `<td class="${x}"></td>`).join(' ') + '</tr>';
 
-  // === Instructions table ===
-  let instOptions = {
-    valueNames: ['command', 'operands', 'operation', 'description', 'flags', 'cycles', 'opcode', 'example'],
+  const processInstRow = row => {
+    const c = row['command'];
+    row['command'] = `<a target="_blank" href="https://www.microchip.com/webdoc/avrassembler/avrassembler.wb_${c}.html">${c}</a>`;
+    row['example'] = '<pre>'+row['example'].replace('\n', '<br>')+'</pre>';
+    return row;
   };
-  instOptions['item'] = makeRowTemplate(instOptions.valueNames);
-  let instList = new List('instructions', instOptions);
+
+  const tables = {
+    instructions: {
+      columns: ['command', 'operands', 'operation', 'description', 'flags', 'cycles', 'opcode', 'example'],
+      processRow: processInstRow
+    },
+    operands: {
+      columns: ['operand', 'meaning', 'values', 'pattern']
+    },
+    notations: {
+      columns: ['notation', 'meaning']
+    }
+  };
+
+  const escapeRow = row => {
+    Object.keys(row).forEach(key => row[key] = _.escape(row[key]));
+    return row;
+  };
+
+  const listObjects = Object.keys(tables).map(t => {
+    const columns = tables[t].columns;
+    const options = {
+      valueNames: columns,
+      item: makeRowTemplate(columns),
+    };
+    const list = new List(t, options);
+
+    const process = tables[t].processRow || _.identity;
+    fetch(`data/${t}.json`)
+    .then(resp => resp.json())
+    .then(json => list.add(json.map(escapeRow).map(process)));
+  });
 
   let searchCmdBox = document.querySelector('input.search-command');
   searchCmdBox.addEventListener('input', _.debounce(
-    ev => instList.search(searchCmdBox.value, ['command']), 
+    ev => listObjects[0].search(searchCmdBox.value, ['command']), 
   100));
-
-  fetch('data/instructions.json')
-  .then(resp => resp.json())
-  .then(json => instList.add(json));
-
-  // === Operands table ===
-  let opsOptions = {
-    valueNames: ['operand', 'meaning', 'values', 'pattern']
-  };
-  opsOptions['item'] = makeRowTemplate(opsOptions.valueNames);
-  let opsList = new List('operands', opsOptions);
-
-  fetch('data/operands.json')
-  .then(resp => resp.json())
-  .then(json => opsList.add(json));
-
-  // === Notations table ===
-  let notationOptions = {
-    valueNames: ['notation', 'meaning']
-  };
-  notationOptions['item'] = makeRowTemplate(notationOptions.valueNames);
-  let notationList = new List('notations', notationOptions);
-
-  fetch('data/notations.json')
-  .then(resp => resp.json())
-  .then(json => notationList.add(json));
-
 
   // Select instructions tab
   hideAllTabs();

@@ -47,7 +47,7 @@ def parse(soup: bs4.BeautifulSoup):
             r[f] = ' '.join(r[f].split())
         if len(r) < 4:
             for i, x in enumerate(r):
-                operands[-1][i+2] += ('<br>'+x)
+                operands[-1][i+2] += ('\n'+x)
         else:
             operands.append(r)
     operands = [dict(zip(op_names, op)) for op in operands]
