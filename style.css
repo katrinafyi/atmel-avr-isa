@@ -6,15 +6,21 @@ body {
     font-family: sans-serif;
 }
 
-#tabs {
-    margin: 20px 0;
+#header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+
+    margin: 15px 0;
 }
 
-
 .tab-link {
+    display: inline-block;
     cursor: pointer;
     background: #eeeeee;
     padding: 5px;
+    margin: 2px;
 }
 
 .selected {
