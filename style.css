@@ -1,3 +1,7 @@
+:root {
+    --mono-fonts: 'Roboto Mono', 'Consolas', monospace;
+}
+
 .hidden {
     display: none;
 }
@@ -32,11 +36,12 @@ input {
     padding: 5px;
 }
 
-/* Tables */
-
+pre {
+    font-family: var(--mono-fonts);
+}
 table {
     margin: 10px 0;
-    font-family: 'Consolas', monospace;
+    font-family: var(--mono-fonts);
 }
 
 table, td {
@@ -63,6 +68,6 @@ td {
 #instructions .opcode {
     width: 20ch;
 }
-#instructions .example {
-    width: 37ch;
+#instructions .example, #instructions .example pre {
+    width: 40ch;
 }
