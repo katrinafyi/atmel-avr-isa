@@ -36,7 +36,6 @@ def parse(soup: bs4.BeautifulSoup):
             for f in (2, 3, 6):
                 r[f] = ' '.join(r[f].split())
             assert len(r) == 8
-            r[-1] = r[-1].replace('\n', '<br>')
             instructions.append(dict(zip(columns, r)))
 
     operands = [] 
@@ -67,11 +66,14 @@ def parse(soup: bs4.BeautifulSoup):
     pass 
 
 if __name__ == "__main__":
-    with open('./scripts/isa_raw.htm') as f:
+    import os 
+    os.chdir(os.path.dirname(__file__))
+
+    path = './'
+    with open(path+'isa_raw.htm') as f:
         ops, nots, items = parse(bs4.BeautifulSoup(f.read()))
 
     import json
-    path = './'
     with open(path+'instructions.json', 'w') as f:
         json.dump(items, f, indent=2)
     with open(path+'operands.json', 'w') as f:

@@ -7,7 +7,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0001 11rd dddd rrrr",
-    "example": "\u00a0\u00a0 ;add r1:r0 to r3:r[1]<br>  add r2,r0\u00a0\u00a0\u00a0\u00a0 ; add low byte adc r3,r1\u00a0\u00a0\u00a0\u00a0 ; add high byte "
+    "example": "\u00a0\u00a0 ;add r1:r0 to r3:r[1]\n  add r2,r0\u00a0\u00a0\u00a0\u00a0 ; add low byte adc r3,r1\u00a0\u00a0\u00a0\u00a0 ; add high byte "
   },
   {
     "command": "ADD",
@@ -17,7 +17,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0000 11rd dddd rrrr",
-    "example": "\u00a0\u00a0 ;add r1:r0 to r3:r[1]<br>  add r2,r0\u00a0\u00a0\u00a0\u00a0 ; add low byte adc r3,r1\u00a0\u00a0\u00a0\u00a0 ; add high byte "
+    "example": "\u00a0\u00a0 ;add r1:r0 to r3:r[1]\n  add r2,r0\u00a0\u00a0\u00a0\u00a0 ; add low byte adc r3,r1\u00a0\u00a0\u00a0\u00a0 ; add high byte "
   },
   {
     "command": "ADIW",
@@ -37,7 +37,7 @@
     "flags": "---SVNZ-,\n  \nV cleared",
     "cycles": "1",
     "opcode": "0010 00rd dddd rrrr",
-    "example": "ldi r16, 1\u00a0\u00a0\u00a0 ; set 0000 0001 in<br>  r16 and r2, r16\u00a0\u00a0 ; isolate bit 0 in r2 "
+    "example": "ldi r16, 1\u00a0\u00a0\u00a0 ; set 0000 0001 in\n  r16 and r2, r16\u00a0\u00a0 ; isolate bit 0 in r2 "
   },
   {
     "command": "ANDI",
@@ -47,7 +47,7 @@
     "flags": "---SVNZ-,\n  \nV cleared",
     "cycles": "1",
     "opcode": "0111 KKKK dddd KKKK",
-    "example": "andi<br>  r18,$10\u00a0 ; isolate bit 4 in r18 "
+    "example": "andi\n  r18,$10\u00a0 ; isolate bit 4 in r18 "
   },
   {
     "command": "ASR",
@@ -67,7 +67,7 @@
     "flags": "SREG(s)",
     "cycles": "1",
     "opcode": "1001 0100 1sss 1000",
-    "example": "bclr 7\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; disable<br>  interrupts "
+    "example": "bclr 7\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; disable\n  interrupts "
   },
   {
     "command": "BLD",
@@ -77,7 +77,7 @@
     "flags": "-T------",
     "cycles": "1",
     "opcode": "1111 100d dddd 0bbb",
-    "example": "bst r1, 2\u00a0 ; store bit 2 of r1 in<br>  T bld r0, 4\u00a0 ; load T into bit 4 of r0 "
+    "example": "bst r1, 2\u00a0 ; store bit 2 of r1 in\n  T bld r0, 4\u00a0 ; load T into bit 4 of r0 "
   },
   {
     "command": "BRBC",
@@ -87,7 +87,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 01kk kkkk ksss",
-    "example": "cpi r20, 5 ; compare r20 to value<br>  5 brbc 1,noteq\u00a0 ; Branch if zero flag 0 ... noteq: nop\u00a0\u00a0\u00a0 ; do nothing "
+    "example": "cpi r20, 5 ; compare r20 to value\n  5 brbc 1,noteq\u00a0 ; Branch if zero flag 0 ... noteq: nop\u00a0\u00a0\u00a0 ; do nothing "
   },
   {
     "command": "BRBS",
@@ -97,7 +97,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 00kk kkkk ksss",
-    "example": "bst r0, 3\u00a0 ; load T with bit 3 of<br>  r0 brbs 6, bitset ; Branch if T was set "
+    "example": "bst r0, 3\u00a0 ; load T with bit 3 of\n  r0 brbs 6, bitset ; Branch if T was set "
   },
   {
     "command": "BRCC",
@@ -107,7 +107,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 01kk kkkk k000",
-    "example": "\u00a0add r22, r23\u00a0 ; add r23 to r22 <br>brcc nocarry\u00a0 ; branch if<br>  carry\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; cleared "
+    "example": "\u00a0add r22, r23\u00a0 ; add r23 to r22 \nbrcc nocarry\u00a0 ; branch if\n  carry\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; cleared "
   },
   {
     "command": "BRCS",
@@ -117,7 +117,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 00kk kkkk k000",
-    "example": "\u00a0cp r26, r25 ; compare r26 with<br>  r25 <br>brcs label\u00a0 ; branch if carry set<br>  "
+    "example": "\u00a0cp r26, r25 ; compare r26 with\n  r25 \nbrcs label\u00a0 ; branch if carry set\n  "
   },
   {
     "command": "BREAK",
@@ -137,7 +137,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 00kk kkkk k001",
-    "example": "\u00a0cp r1,r0\u00a0\u00a0\u00a0\u00a0 ; compare r1 and r0<br>  <br>breq label\u00a0\u00a0 ; branch if equal "
+    "example": "\u00a0cp r1,r0\u00a0\u00a0\u00a0\u00a0 ; compare r1 and r0\n  \nbreq label\u00a0\u00a0 ; branch if equal "
   },
   {
     "command": "BRGE",
@@ -147,7 +147,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 01kk kkkk k100",
-    "example": "\u00a0cp r1, r2 <br>brge label ; branch if r1 \u2265<br>  r2\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (signed) "
+    "example": "\u00a0cp r1, r2 \nbrge label ; branch if r1 \u2265\n  r2\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (signed) "
   },
   {
     "command": "BRHC",
@@ -197,7 +197,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 00kk kkkk k000",
-    "example": "\u00a0cpi r19,$8 ; compare r19 with $8<br>  <br>brlo label ; branch if r19 <<br>  $8 (unsigned) "
+    "example": "\u00a0cpi r19,$8 ; compare r19 with $8\n  \nbrlo label ; branch if r19 <\n  $8 (unsigned) "
   },
   {
     "command": "BRLT",
@@ -207,7 +207,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 00kk kkkk k100",
-    "example": "\u00a0cpi<br>  r19,$8 ; compare r19 with $8 brlt label ; branch if r19 < $8\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<br>  ;(signed) "
+    "example": "\u00a0cpi\n  r19,$8 ; compare r19 with $8 brlt label ; branch if r19 < $8\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\n  ;(signed) "
   },
   {
     "command": "BRMI",
@@ -217,7 +217,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 00kk kkkk k010",
-    "example": "subi r18,<br>  4 ; subtract 4 from r18 brmi label ; branch if result\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; negative "
+    "example": "subi r18,\n  4 ; subtract 4 from r18 brmi label ; branch if result\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; negative "
   },
   {
     "command": "BRNE",
@@ -227,7 +227,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 01kk kkkk k001",
-    "example": "\u00a0cpi r27, 5 ; compare r27 to 5 <br>brne label ; branch if r27 \u2260 5 "
+    "example": "\u00a0cpi r27, 5 ; compare r27 to 5 \nbrne label ; branch if r27 \u2260 5 "
   },
   {
     "command": "BRPL",
@@ -237,7 +237,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 01kk kkkk k010",
-    "example": "subi r26,$50 ; subtract $50 from<br>  r26 brpl pos ; branch if result positive "
+    "example": "subi r26,$50 ; subtract $50 from\n  r26 brpl pos ; branch if result positive "
   },
   {
     "command": "BRSH",
@@ -247,7 +247,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 01kk kkkk k000",
-    "example": "\u00a0cp r1, r2 <br>brsh label ; branch if r1 \u2265<br>  r2\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (unsigned) "
+    "example": "\u00a0cp r1, r2 \nbrsh label ; branch if r1 \u2265\n  r2\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (unsigned) "
   },
   {
     "command": "BRTC",
@@ -257,7 +257,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 01kk kkkk k110",
-    "example": "bst r3, 5 ; store bit 5 of r3 in<br>  T brtc label; branch if bit was 0 "
+    "example": "bst r3, 5 ; store bit 5 of r3 in\n  T brtc label; branch if bit was 0 "
   },
   {
     "command": "BRTS",
@@ -267,7 +267,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 00kk kkkk k110",
-    "example": "bst r3, 5 ; store bit 5 of r3 in<br>  T brts label; branch if bit was 1 "
+    "example": "bst r3, 5 ; store bit 5 of r3 in\n  T brts label; branch if bit was 1 "
   },
   {
     "command": "BRVC",
@@ -277,7 +277,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 01kk kkkk k011",
-    "example": "add r3, r4\u00a0 ; add r4 to r3 <br>brvc noover ; branch if no<br>  overflow\u00a0 "
+    "example": "add r3, r4\u00a0 ; add r4 to r3 \nbrvc noover ; branch if no\n  overflow\u00a0 "
   },
   {
     "command": "BRVS",
@@ -287,7 +287,7 @@
     "flags": "--------",
     "cycles": "1,2*",
     "opcode": "1111 00kk kkkk k011",
-    "example": "add r3, r4 ; add r4 to r3 brvs<br>  over\u00a0 ; branch if overflow "
+    "example": "add r3, r4 ; add r4 to r3 brvs\n  over\u00a0 ; branch if overflow "
   },
   {
     "command": "BSET",
@@ -307,7 +307,7 @@
     "flags": "-T------",
     "cycles": "1",
     "opcode": "1111 101d dddd 0bbb",
-    "example": "bst r1, 2\u00a0 ; store bit 2 of r1 in<br>  T bld r0, 4\u00a0 ; load T into bit 4 of r0 "
+    "example": "bst r1, 2\u00a0 ; store bit 2 of r1 in\n  T bld r0, 4\u00a0 ; load T into bit 4 of r0 "
   },
   {
     "command": "CALL",
@@ -317,7 +317,7 @@
     "flags": "--------",
     "cycles": "4",
     "opcode": "1001 010k kkkk 111k kkkk kkkk kkkk kkkk",
-    "example": "call check ; call subroutine<br>  (at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; label check) "
+    "example": "call check ; call subroutine\n  (at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; label check) "
   },
   {
     "command": "CBI",
@@ -327,7 +327,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 1000 PPPP Pbbb",
-    "example": "cbi $0B, 7 ; Clear bit 7 in port<br>  D "
+    "example": "cbi $0B, 7 ; Clear bit 7 in port\n  D "
   },
   {
     "command": "CBR",
@@ -337,7 +337,7 @@
     "flags": "---SVNZ-,\n  \nV cleared",
     "cycles": "1",
     "opcode": "As per ANDi with K Complemented",
-    "example": "cbr r16,$F0 ; clr upper nibble of<br>  r16 cbr r18, 1\u00a0 ; clear bit 0 in r18 "
+    "example": "cbr r16,$F0 ; clr upper nibble of\n  r16 cbr r18, 1\u00a0 ; clear bit 0 in r18 "
   },
   {
     "command": "CLC",
@@ -447,7 +447,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0001 01rd dddd rrrr",
-    "example": "cp r4, r19 ; compare r4 with r19<br>  brne noteq ; branch if r4 \u2260 r19 "
+    "example": "cp r4, r19 ; compare r4 with r19\n  brne noteq ; branch if r4 \u2260 r19 "
   },
   {
     "command": "CPC",
@@ -457,7 +457,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0000 01rd dddd rrrr",
-    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; compare r3:r2 with<br>  r1:r0 cp r2, r0\u00a0 ; compare low byte cpc r3, r1 ; compare high byte brne noteq<br>  ; branch if not equal "
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; compare r3:r2 with\n  r1:r0 cp r2, r0\u00a0 ; compare low byte cpc r3, r1 ; compare high byte brne noteq\n  ; branch if not equal "
   },
   {
     "command": "CPI",
@@ -467,7 +467,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0011 KKKK dddd KKKK",
-    "example": "cpi r19, 3 ; compare r19 with 3<br>  brne error ; branch if r19 \u2260 3 "
+    "example": "cpi r19, 3 ; compare r19 with 3\n  brne error ; branch if r19 \u2260 3 "
   },
   {
     "command": "CPSE",
@@ -477,7 +477,7 @@
     "flags": "--------",
     "cycles": "1,2,\n3\u2020",
     "opcode": "0001 00rd dddd rrrr",
-    "example": "cpse r4,r0 ; compare r4 to r0 neg<br>  r4\u00a0\u00a0\u00a0\u00a0 ; only executed if r4 \u2260 r0<br>  ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue here "
+    "example": "cpse r4,r0 ; compare r4 to r0 neg\n  r4\u00a0\u00a0\u00a0\u00a0 ; only executed if r4 \u2260 r0\n  ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue here "
   },
   {
     "command": "DEC",
@@ -497,7 +497,7 @@
     "flags": "---SVNZ-,\n  \nV cleared",
     "cycles": "1",
     "opcode": "0010 01rd dddd rrrr",
-    "example": "eor r0, r22 ; bitwise exclusive<br>  or "
+    "example": "eor r0, r22 ; bitwise exclusive\n  or "
   },
   {
     "command": "FMUL",
@@ -537,7 +537,7 @@
     "flags": "--------",
     "cycles": "3",
     "opcode": "1001 0101 0000 1001",
-    "example": "...\u00a0\u00a0 ; put value in Z (ZH:ZL)<br>  icall ; call routine pointed to by Z "
+    "example": "...\u00a0\u00a0 ; put value in Z (ZH:ZL)\n  icall ; call routine pointed to by Z "
   },
   {
     "command": "IJMP",
@@ -547,7 +547,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 0100 0000 1001",
-    "example": "...\u00a0\u00a0 ; put value in Z (ZH:ZL) ijmp\u00a0<br>  ; jump to code at address Z "
+    "example": "...\u00a0\u00a0 ; put value in Z (ZH:ZL) ijmp\u00a0\n  ; jump to code at address Z "
   },
   {
     "command": "IN",
@@ -587,7 +587,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1000 000d dddd W000",
-    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;\n  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 \nld r0,\n  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 \nldd r2,\n  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,\n  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
   },
   {
     "command": "LD",
@@ -597,7 +597,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 000d dddd 1100",
-    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;\n  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 \nld r0,\n  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 \nldd r2,\n  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,\n  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
   },
   {
     "command": "LDD",
@@ -607,7 +607,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "10q0 qq0d dddd Wqqq",
-    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;\n  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 \nld r0,\n  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 \nldd r2,\n  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,\n  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
   },
   {
     "command": "LD",
@@ -617,7 +617,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 000d dddd W001",
-    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;\n  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 \nld r0,\n  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 \nldd r2,\n  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,\n  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
   },
   {
     "command": "LD",
@@ -627,7 +627,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 000d dddd 1101",
-    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;\n  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 \nld r0,\n  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 \nldd r2,\n  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,\n  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
   },
   {
     "command": "LD",
@@ -637,7 +637,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 000d dddd W010",
-    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;\n  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 \nld r0,\n  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 \nldd r2,\n  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,\n  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
   },
   {
     "command": "LD",
@@ -647,7 +647,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 000d dddd 1110",
-    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;<br>  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 <br>ld r0,<br>  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 <br>ldd r2,<br>  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,<br>  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
+    "example": "clr YH\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear high byte of Y ldi YL, $60 ;\n  set low byte of Y = $60 ld r1, Y+\u00a0\u00a0 ; load r1 with value at \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 \nld r0,\n  Y\u00a0\u00a0\u00a0 ; load r0 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $61 \nldd r2,\n  Y+2 ; load r2 with value at\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $63 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Y still has value $61) ld r3,\n  -Y\u00a0\u00a0 ; load r3 with value at\u00a0 \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $60 "
   },
   {
     "command": "LDI",
@@ -657,7 +657,7 @@
     "flags": "--------",
     "cycles": "1",
     "opcode": "1110 KKKK dddd KKKK",
-    "example": "ldi r30, $F0 ; set Z low byte to<br>  $F0 "
+    "example": "ldi r30, $F0 ; set Z low byte to\n  $F0 "
   },
   {
     "command": "LDS",
@@ -667,7 +667,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 000d dddd 0000 kkkk kkkk kkkk kkkk",
-    "example": "lds r2,<br>  $FF00 ;load r2 with contents\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ;of mem. location $FF00"
+    "example": "lds r2,\n  $FF00 ;load r2 with contents\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ;of mem. location $FF00"
   },
   {
     "command": "LPM",
@@ -677,7 +677,7 @@
     "flags": "--------",
     "cycles": "3",
     "opcode": "1001 0101 1100 1000",
-    "example": "ldi ZH,<br>  high(table << 1); init. Z ldi ZL, low(table*2) lpm r16, Z ;load const<br>  from prog mem.<br>... table:<br>  <br>.dw 0x5876 ; $76 at prog. memory<br>  byte<br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<br>  ; address table*2 "
+    "example": "ldi ZH,\n  high(table << 1); init. Z ldi ZL, low(table*2) lpm r16, Z ;load const\n  from prog mem.\n... table:\n  \n.dw 0x5876 ; $76 at prog. memory\n  byte\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\n  ; address table*2 "
   },
   {
     "command": "LPM",
@@ -707,7 +707,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0000 11Dd dddd DDDD (DDDDD=ddddd)",
-    "example": "lsl r0 ;<br>  multiply r0 by 2 "
+    "example": "lsl r0 ;\n  multiply r0 by 2 "
   },
   {
     "command": "LSR",
@@ -717,7 +717,7 @@
     "flags": "---SVNZC, \nN\u21900",
     "cycles": "1",
     "opcode": "1001 010d dddd 0110",
-    "example": "lsr r0 ; divide r0 by 2,\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0<br>  ; remainder in C "
+    "example": "lsr r0 ; divide r0 by 2,\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\n  ; remainder in C "
   },
   {
     "command": "MOV",
@@ -727,7 +727,7 @@
     "flags": "--------",
     "cycles": "1",
     "opcode": "0010 11rd dddd rrrr",
-    "example": "mov r16,<br>  r0 ; copy r0 to r16 "
+    "example": "mov r16,\n  r0 ; copy r0 to r16 "
   },
   {
     "command": "MOVW",
@@ -737,7 +737,7 @@
     "flags": "--------",
     "cycles": "1",
     "opcode": "0000 0001 dddd rrrr",
-    "example": "movw<br>  r17:r16, r1:r0 "
+    "example": "movw\n  r17:r16, r1:r0 "
   },
   {
     "command": "MUL",
@@ -747,7 +747,7 @@
     "flags": "------ZC",
     "cycles": "2",
     "opcode": "1001 11rd dddd rrrr",
-    "example": "mul r5, r4<br>  "
+    "example": "mul r5, r4\n  "
   },
   {
     "command": "MULS",
@@ -757,7 +757,7 @@
     "flags": "------ZC",
     "cycles": "2",
     "opcode": "0000 0010 dddd rrrr",
-    "example": "muls r21,<br>  r20 "
+    "example": "muls r21,\n  r20 "
   },
   {
     "command": "MULSU",
@@ -767,7 +767,7 @@
     "flags": "------ZC",
     "cycles": "2",
     "opcode": "0000 0011 0ddd 0rrr",
-    "example": "mulsu r21,<br>  r20 "
+    "example": "mulsu r21,\n  r20 "
   },
   {
     "command": "NEG",
@@ -777,7 +777,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "1001 010d dddd 0001",
-    "example": "neg r11 ;<br>  negate value in r11 "
+    "example": "neg r11 ;\n  negate value in r11 "
   },
   {
     "command": "NOP",
@@ -787,7 +787,7 @@
     "flags": "--------",
     "cycles": "1",
     "opcode": "0000 0000 0000 0000",
-    "example": "nop ; do<br>  nothing for 1 clock cycle "
+    "example": "nop ; do\n  nothing for 1 clock cycle "
   },
   {
     "command": "OR",
@@ -797,7 +797,7 @@
     "flags": "---SVNZ-, \nV\n  cleared",
     "cycles": "1",
     "opcode": "0010 10rd dddd rrrr",
-    "example": "ldi r16, 3<br>  <br>or r2, r16\u00a0\u00a0 ; set bits 0 and 1<br>  of r2"
+    "example": "ldi r16, 3\n  \nor r2, r16\u00a0\u00a0 ; set bits 0 and 1\n  of r2"
   },
   {
     "command": "ORI",
@@ -807,7 +807,7 @@
     "flags": "---SVNZ-, \nV\n  cleared",
     "cycles": "1",
     "opcode": "0110 KKKK dddd KKKK",
-    "example": "ori r17, $0F; set bits 0,1,2,3 of<br>  r17"
+    "example": "ori r17, $0F; set bits 0,1,2,3 of\n  r17"
   },
   {
     "command": "OUT",
@@ -817,7 +817,7 @@
     "flags": "--------",
     "cycles": "1",
     "opcode": "1011 1PPr rrrr PPPP",
-    "example": "clr r16 ;<br>  clear r16 <br>out $05, r16 ; write zeroes to<br>  port B"
+    "example": "clr r16 ;\n  clear r16 \nout $05, r16 ; write zeroes to\n  port B"
   },
   {
     "command": "POP",
@@ -827,7 +827,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 000d dddd 1111",
-    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save<br>  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff<br>  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore<br>  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save\n  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff\n  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore\n  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
   },
   {
     "command": "PUSH",
@@ -837,7 +837,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 001r rrrr 1111",
-    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save<br>  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff<br>  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore<br>  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save\n  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff\n  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore\n  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
   },
   {
     "command": "RCALL",
@@ -847,7 +847,7 @@
     "flags": "--------",
     "cycles": "3",
     "opcode": "1101 kkkk kkkk kkkk",
-    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save<br>  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff<br>  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore<br>  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save\n  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff\n  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore\n  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
   },
   {
     "command": "RET",
@@ -857,7 +857,7 @@
     "flags": "--------",
     "cycles": "4",
     "opcode": "1001 0101 0000 1000",
-    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save<br>  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff<br>  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore<br>  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rcall\u00a0 routine\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... routine: push r14 ; save\n  r14 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 push r13 ; save r13 on stack\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... ;do stuff\n  using r13, r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r13 ; restore r13\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 pop r14 ; restore\n  r14\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ret\u00a0 ; return from\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; subroutine "
   },
   {
     "command": "RETI",
@@ -867,7 +867,7 @@
     "flags": "I-------, \nI\n  is set",
     "cycles": "4",
     "opcode": "1001 0101 0001 1000",
-    "example": "int_handler:<br>  push r0\u00a0\u00a0\u00a0\u00a0 ...\u00a0\u00a0\u00a0\u00a0 pop r0 <br>\u00a0\u00a0\u00a0 reti ;<br>  return and enable interrupts "
+    "example": "int_handler:\n  push r0\u00a0\u00a0\u00a0\u00a0 ...\u00a0\u00a0\u00a0\u00a0 pop r0 \n\u00a0\u00a0\u00a0 reti ;\n  return and enable interrupts "
   },
   {
     "command": "RJMP",
@@ -877,7 +877,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1100 kkkk kkkk kkkk",
-    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rjmp RESET\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... <br>RESET: ...<br>  "
+    "example": "\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 rjmp RESET\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ... \nRESET: ...\n  "
   },
   {
     "command": "ROL",
@@ -887,7 +887,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0001 11Dd dddd DDDD (DDDDD=ddddd)",
-    "example": "\u00a0\u00a0\u00a0 ; multiply r19:r18 by 2 lsl<br>  r18 rol r19 "
+    "example": "\u00a0\u00a0\u00a0 ; multiply r19:r18 by 2 lsl\n  r18 rol r19 "
   },
   {
     "command": "ROR",
@@ -897,7 +897,7 @@
     "flags": "---SVNZC",
     "cycles": "1",
     "opcode": "1001 010d dddd 0111",
-    "example": "\u00a0\u00a0 ; divide r17:r16 (signed) by 2<br>  asr r17 ror r16 "
+    "example": "\u00a0\u00a0 ; divide r17:r16 (signed) by 2\n  asr r17 ror r16 "
   },
   {
     "command": "SBC",
@@ -907,7 +907,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0000 10rd dddd rrrr",
-    "example": "\u00a0\u00a0 ; subtract r1:r0 from r3:r2<br>  sub r2, r0 ; subtract low byte sbc r3,r1 ; subtract high byte "
+    "example": "\u00a0\u00a0 ; subtract r1:r0 from r3:r2\n  sub r2, r0 ; subtract low byte sbc r3,r1 ; subtract high byte "
   },
   {
     "command": "SBCI",
@@ -917,7 +917,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0100 KKKK dddd KKKK",
-    "example": "\u00a0\u00a0 ; subtract $4F23 from r17:r16<br>  subi r16, $23 ; subtract low byte sbci r17, $4F ; sub. w/ carry hi byte"
+    "example": "\u00a0\u00a0 ; subtract $4F23 from r17:r16\n  subi r16, $23 ; subtract low byte sbci r17, $4F ; sub. w/ carry hi byte"
   },
   {
     "command": "SBI",
@@ -927,7 +927,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 1010 PPPP Pbbb",
-    "example": "sbi $0B, 7<br>  ; Set bit 7 in port D "
+    "example": "sbi $0B, 7\n  ; Set bit 7 in port D "
   },
   {
     "command": "SBIC",
@@ -937,7 +937,7 @@
     "flags": "--------",
     "cycles": "1,2,\n3\u2020",
     "opcode": "1001 1001 PPPP Pbbb",
-    "example": "\u00a0\u00a0 ; wait<br>  until bit 3 of port D is 0 wait: sbic $0B, 3 <br>\u00a0\u00a0\u00a0\u00a0\u00a0 rjmp<br>  wait ; if bit set, wait\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
+    "example": "\u00a0\u00a0 ; wait\n  until bit 3 of port D is 0 wait: sbic $0B, 3 \n\u00a0\u00a0\u00a0\u00a0\u00a0 rjmp\n  wait ; if bit set, wait\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
   },
   {
     "command": "SBIS",
@@ -947,7 +947,7 @@
     "flags": "--------",
     "cycles": "1,2,\n3\u2020",
     "opcode": "1001 1011 PPPP Pbbb",
-    "example": "\u00a0\u00a0 ; wait<br>  until bit 4 of port B is 1 wait: sbis $05, 4 <br>\u00a0\u00a0\u00a0\u00a0\u00a0 rjmp<br>  wait; if bit cleared, wait\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
+    "example": "\u00a0\u00a0 ; wait\n  until bit 4 of port B is 1 wait: sbis $05, 4 \n\u00a0\u00a0\u00a0\u00a0\u00a0 rjmp\n  wait; if bit cleared, wait\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
   },
   {
     "command": "SBIW",
@@ -957,7 +957,7 @@
     "flags": "---SVNZC",
     "cycles": "2",
     "opcode": "1001 0111 KKdd KKKK",
-    "example": "sbiw r25:r24,1; sub. 1 from<br>  r25:r24 sbiw YH:YL,63 ; subtract 63 from Y "
+    "example": "sbiw r25:r24,1; sub. 1 from\n  r25:r24 sbiw YH:YL,63 ; subtract 63 from Y "
   },
   {
     "command": "SBR",
@@ -967,7 +967,7 @@
     "flags": "---SVNZ-,\n  \nV cleared",
     "cycles": "1",
     "opcode": "0110 KKKK dddd KKKK",
-    "example": "\u00a0sbr r16,<br>  3\u00a0 ; set bits 0 and 1 in r16"
+    "example": "\u00a0sbr r16,\n  3\u00a0 ; set bits 0 and 1 in r16"
   },
   {
     "command": "SBRC",
@@ -977,7 +977,7 @@
     "flags": "--------",
     "cycles": "1,2,\n3\u2020",
     "opcode": "1111 110r rrrr 0bbb",
-    "example": "\u00a0\u00a0 ; r0 <- absolute value (r0)<br>  sbrc r0, 7 ; skip if bit 7 of r0 is 0 neg r0\u00a0\u00a0\u00a0\u00a0 ; negate r0 (if r0(7) = 1)<br>  ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
+    "example": "\u00a0\u00a0 ; r0 <- absolute value (r0)\n  sbrc r0, 7 ; skip if bit 7 of r0 is 0 neg r0\u00a0\u00a0\u00a0\u00a0 ; negate r0 (if r0(7) = 1)\n  ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
   },
   {
     "command": "SBRS",
@@ -987,7 +987,7 @@
     "flags": "--------",
     "cycles": "1,2,\n3\u2020",
     "opcode": "1111 111r rrrr 0bbb",
-    "example": "sbrs r0, 6 ; skip if bit 6 of r0<br>  is 1 sub r2, r3 ; only if r0(6) = 0 ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
+    "example": "sbrs r0, 6 ; skip if bit 6 of r0\n  is 1 sub r2, r3 ; only if r0(6) = 0 ...\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; continue "
   },
   {
     "command": "SEC",
@@ -1037,7 +1037,7 @@
     "flags": "--------",
     "cycles": "1",
     "opcode": "1110 1111 dddd 1111",
-    "example": "\u00a0ser r16\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; set r16 (all<br>  ones) <br>out $04,<br>  r16\u00a0 ; make port B an output"
+    "example": "\u00a0ser r16\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; set r16 (all\n  ones) \nout $04,\n  r16\u00a0 ; make port B an output"
   },
   {
     "command": "SES",
@@ -1107,7 +1107,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1000 001r rrrr W000",
-    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi\n  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0\n  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is\n  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
   },
   {
     "command": "ST",
@@ -1117,7 +1117,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 001r rrrr 1100",
-    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi\n  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0\n  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is\n  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
   },
   {
     "command": "ST",
@@ -1127,7 +1127,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 001r rrrr W001",
-    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi\n  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0\n  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is\n  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
   },
   {
     "command": "ST",
@@ -1137,7 +1137,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 001r rrrr 1101",
-    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi\n  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0\n  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is\n  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
   },
   {
     "command": "ST",
@@ -1147,7 +1147,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 001r rrrr W010",
-    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi\n  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0\n  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is\n  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
   },
   {
     "command": "ST",
@@ -1157,7 +1157,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 001r rrrr 1110",
-    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi\n  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0\n  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is\n  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
   },
   {
     "command": "STD",
@@ -1167,7 +1167,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "10q0 qq1r rrrr Wqqq",
-    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi<br>  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0<br>  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is<br>  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
+    "example": "clr r31\u00a0\u00a0\u00a0\u00a0\u00a0 ; clear Z high byte ldi\n  r30, $60 ; set Z low byte to $60 st Z+, r0\u00a0\u00a0\u00a0 ; store r0 to $60 st Z, r1\u00a0\u00a0\u00a0\u00a0\n  ; store r1 to $61 std Z+2, r2\u00a0 ; store r2 to $63\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; (Z still is\n  $61) st \u2013Z, r3\u00a0\u00a0\u00a0 ; store r3 to $60 "
   },
   {
     "command": "STS",
@@ -1177,7 +1177,7 @@
     "flags": "--------",
     "cycles": "2",
     "opcode": "1001 001r rrrr 0000 kkkk kkkk kkkk kkkk",
-    "example": "lds r2,<br>  $FF00 ; load r2 with value at <br>\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $FF00 add r2,<br>  r1\u00a0\u00a0\u00a0 ; add r1 to r2 sts $FF00, r2 ; Write back "
+    "example": "lds r2,\n  $FF00 ; load r2 with value at \n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; $FF00 add r2,\n  r1\u00a0\u00a0\u00a0 ; add r1 to r2 sts $FF00, r2 ; Write back "
   },
   {
     "command": "SUB",
@@ -1187,7 +1187,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0001 10rd dddd rrrr",
-    "example": "sub r13,<br>  r12\u00a0 ; subtract r12 from r13"
+    "example": "sub r13,\n  r12\u00a0 ; subtract r12 from r13"
   },
   {
     "command": "SUBI",
@@ -1197,7 +1197,7 @@
     "flags": "--HSVNZC",
     "cycles": "1",
     "opcode": "0101 KKKK dddd KKKK",
-    "example": "subi r22,<br>  $11 ; subtract $11 from r22"
+    "example": "subi r22,\n  $11 ; subtract $11 from r22"
   },
   {
     "command": "SWAP",
@@ -1207,7 +1207,7 @@
     "flags": "--------",
     "cycles": "1",
     "opcode": "1001 010d dddd 0010",
-    "example": "swap r1 ; swap high and low<br>  nibbles\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; of r1 "
+    "example": "swap r1 ; swap high and low\n  nibbles\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 ; of r1 "
   },
   {
     "command": "TST",
@@ -1217,7 +1217,7 @@
     "flags": "---SVNZ-,\n  \nV cleared",
     "cycles": "1",
     "opcode": "0010 00Dd dddd DDDD (DDDDD=ddddd)",
-    "example": "tst r0\u00a0\u00a0\u00a0\u00a0 ; test r0 breq label ;<br>  branch if r0 = 0 "
+    "example": "tst r0\u00a0\u00a0\u00a0\u00a0 ; test r0 breq label ;\n  branch if r0 = 0 "
   },
   {
     "command": "WDR",

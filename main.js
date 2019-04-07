@@ -33,7 +33,7 @@ function main() {
     ev => instList.search(searchCmdBox.value, ['command']), 
   100));
 
-  fetch('instructions.json')
+  fetch('data/instructions.json')
   .then(resp => resp.json())
   .then(json => instList.add(json));
 
@@ -44,7 +44,7 @@ function main() {
   opsOptions['item'] = makeRowTemplate(opsOptions.valueNames);
   let opsList = new List('operands', opsOptions);
 
-  fetch('operands.json')
+  fetch('data/operands.json')
   .then(resp => resp.json())
   .then(json => opsList.add(json));
 
@@ -55,7 +55,7 @@ function main() {
   notationOptions['item'] = makeRowTemplate(notationOptions.valueNames);
   let notationList = new List('notations', notationOptions);
 
-  fetch('notations.json')
+  fetch('data/notations.json')
   .then(resp => resp.json())
   .then(json => notationList.add(json));
 
