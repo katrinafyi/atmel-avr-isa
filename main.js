@@ -24,7 +24,7 @@ function main() {
   const processInstRow = row => {
     const c = row['command'];
     row['command'] = `<a target="_blank" href="https://www.microchip.com/webdoc/avrassembler/avrassembler.wb_${c}.html">${c}</a>`;
-    row['example'] = '<pre>'+row['example'].replace('\n', '<br>')+'</pre>';
+    row['example'] = '<pre>'+row['example']+'</pre>';
     return row;
   };
 
