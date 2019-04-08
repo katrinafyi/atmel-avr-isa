@@ -30,8 +30,8 @@ function main() {
 
   const tables = {
     instructions: {
-      columns: ['command', 'operands', 'operation', 'description', 'flags', 'cycles', 'opcode', 'example'],
-      processRow: processInstRow
+      columns: ['_command', 'command', 'operands', 'operation', 'description', 'flags', 'cycles', 'opcode', 'example'],
+      processRow: processInstRow,
     },
     operands: {
       columns: ['operand', 'meaning', 'values', 'pattern']
@@ -43,6 +43,7 @@ function main() {
 
   const escapeRow = row => {
     Object.keys(row).forEach(key => row[key] = _.escape(row[key]).replace(/\n/g, '<br>'));
+    row._command = row['command'];
     return row;
   };
 
@@ -64,7 +65,7 @@ function main() {
 
   let searchCmdBox = document.querySelector('input.search-command');
   searchCmdBox.addEventListener('input', _.debounce(
-    ev => listObjects[0].search(searchCmdBox.value, ['command']), 
+    ev => listObjects[0].search(searchCmdBox.value, ['_command']), 
   100));
 
   // Select instructions tab
