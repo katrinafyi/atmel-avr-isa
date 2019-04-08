@@ -42,7 +42,7 @@ function main() {
   };
 
   const escapeRow = row => {
-    Object.keys(row).forEach(key => row[key] = _.escape(row[key]).replace(/\n/g, '<br>'));
+    Object.keys(row).forEach(key => row[key] = _.escape(row[key]));
     row._command = row['command'];
     return row;
   };
