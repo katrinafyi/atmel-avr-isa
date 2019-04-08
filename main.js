@@ -23,8 +23,14 @@ function main() {
 
   const processInstRow = row => {
     const c = row['command'];
+    row['_command'] = c;
     row['command'] = `<a target="_blank" href="https://www.microchip.com/webdoc/avrassembler/avrassembler.wb_${c}.html">${c}</a>`;
     row['example'] = '<pre>'+row['example']+'</pre>';
+    return row;
+  };
+
+  const replaceLineBreaks = row => {
+    Object.keys(row).forEach(key => row[key] = row[key].replace(/\n/g, '<br>'));
     return row;
   };
 
@@ -34,16 +40,17 @@ function main() {
       processRow: processInstRow,
     },
     operands: {
-      columns: ['operand', 'meaning', 'values', 'pattern']
+      columns: ['operand', 'meaning', 'values', 'pattern'],
+      processRow: replaceLineBreaks,
     },
     notations: {
-      columns: ['notation', 'meaning']
+      columns: ['notation', 'meaning'],
+      processRow: replaceLineBreaks,
     }
   };
 
   const escapeRow = row => {
     Object.keys(row).forEach(key => row[key] = _.escape(row[key]));
-    row._command = row['command'];
     return row;
   };
 
