@@ -63,10 +63,15 @@ function main() {
     return list;
   });
 
-  let searchCmdBox = document.querySelector('input.search-command');
+  const searchCmdBox = document.querySelector('input.search-command');
   searchCmdBox.addEventListener('input', _.debounce(
     ev => listObjects[0].search(searchCmdBox.value, ['_command']), 
   100));
+  const searchAllBox = document.querySelector('input.search-all');
+  searchAllBox.addEventListener('input', _.debounce(
+    ev => listObjects[0].search(searchAllBox.value, 
+      tables['instructions'].columns.filter(x => x !== 'command')
+  ), 100));
 
   // Select instructions tab
   hideAllTabs();
