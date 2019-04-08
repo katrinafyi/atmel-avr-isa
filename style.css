@@ -72,5 +72,8 @@ td {
     width: 20ch;
 }
 #instructions .example, #instructions .example pre {
-    width: 40ch;
+    width: 50ch;
+}
+#instructions .example {
+    overflow-x: auto;
 }
