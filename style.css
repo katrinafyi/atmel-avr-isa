@@ -77,3 +77,7 @@ td {
 #instructions .example {
     overflow-x: auto;
 }
+
+#io_registers .name {
+    width: 8ch;
+}

@@ -46,6 +46,9 @@ function main() {
     notations: {
       columns: ['notation', 'meaning'],
       processRow: replaceLineBreaks,
+    },
+    io_registers: {
+      columns: ['register', 'address', 'name', 'bit7', 'bit6', 'bit5', 'bit4', 'bit3', 'bit2', 'bit1', 'bit0']
     }
   };
 
