@@ -1,8 +1,12 @@
 function main() {
+  const qs = document.querySelector.bind(document);
+  const qsa = document.querySelectorAll.bind(document);
+
   const getTab = el => document.querySelector('#'+el.dataset.tab);
   const showTab = el => {
     el.classList.add('selected');
     getTab(el).classList.remove('hidden');
+    window.location.hash = '_'+el.dataset.tab;
   };
   const hideTab = el => {
     el.classList.remove('selected');
@@ -73,6 +77,8 @@ function main() {
     return list;
   });
 
+  // Search functionality.
+
   const searchCmdBox = document.querySelector('input.search-command');
   searchCmdBox.addEventListener('input', _.debounce(
     ev => listObjects[0].search(searchCmdBox.value, ['_command']), 
@@ -83,9 +89,56 @@ function main() {
       tables['instructions'].columns.filter(x => x !== 'command')
   ), 100));
 
-  // Select instructions tab
+  // Answer checker
+  const responseBox = qs('textarea#responses');
+  const answerBox = qs('textarea#answers');
+
+  const responseRow = qs('tr.responses');
+  const answerRow = qs('tr.answers');
+  const percent = qs('.percent');
+
+  const parseText = text => 
+    text.split(/[,\s]/).map(r => /^[a-ex.]$/i.exec(r))
+      .filter(x => x).map(x => x[0]).flat(1).map(x => x.toUpperCase());
+  
+  const checkAnswers = () => {
+    const resp = parseText(responseBox.value);
+    const ans = parseText(answerBox.value);
+
+    if (resp.length != ans.length) {
+      alert(`${resp.length} responses provided but there were ${ans.length} answers.`);
+      return;
+    }
+
+    const matches = resp.map((x, i) => ans[i] === x);
+    
+    const letterClass = correct => correct ? 'correct' : 'incorrect' 
+    const makeRow = r => r.map(
+      (x, i) => `<td class="${letterClass(matches[i])}">${x}</td>`)
+      .join('');
+    const respRowHTML = makeRow(resp);
+    const ansRowHTML = makeRow(ans)
+    responseRow.innerHTML = respRowHTML;
+    answerRow.innerHTML = ansRowHTML;
+
+    n = matches.filter(x => x).length;
+    N = resp.length;
+    p = Math.floor(n/N*100);
+    percent.textContent = `${n} / ${N} = ${p}%`;
+    qs('.results').classList.remove('hidden');
+  };
+
+  qs('#check').addEventListener('click', checkAnswers);
+
+  // Select appropriate tab
   hideAllTabs();
-  showTab(document.querySelector('.tab-link[data-tab=instructions]'));
+  let selected;
+  if (window.location.hash) {
+    selected = window.location.hash.replace('#_', '');
+  } else {
+    selected = 'instructions';
+  }
+  showTab(qs(`.tab-link[data-tab=${selected}]`));
 }
 
 window.addEventListener('DOMContentLoaded', main);

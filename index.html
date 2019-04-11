@@ -15,6 +15,7 @@
                 <div class="tab-link" data-tab="operands">Operands</div>
                 <div class="tab-link" data-tab="notations">Notation</div>
                 <div class="tab-link" data-tab="io_registers">IO Registers</div>
+                <div class="tab-link" data-tab="answer_checker">Answer Checker</div>
             </div>
 
             <span>Data from <a target="_blank" href="data/CSSE2010-7201_AVR_Instruction_Set_Summary.pdf">CSSE2010-7201_AVR_Instruction_Set_Summary.pdf</a>.</span>
@@ -78,6 +79,39 @@
                 <tbody class="list">
                 </tbody>
             </table>
+        </div>
+
+        <div id="answer_checker">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Responses<br>
+                        <td>Answers</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><textarea id="responses"></textarea></td>
+                        <td><textarea id="answers"></textarea></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="check">Check</button>
+
+            <div class="results hidden">
+                <h4>Results</h4>
+                <span class="percent">50</span>
+                <table>
+                    <thead>
+                        <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="responses"></tr>
+                        <tr class="answers"></tr>
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
     </body>
 </html>

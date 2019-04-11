@@ -81,3 +81,22 @@ td {
 #io_registers .name {
     width: 8ch;
 }
+
+#answer_checker textarea {
+    height: 7em;
+    max-height: 7em;
+}
+#answer_checker thead {
+    font-family: sans-serif;
+}
+#answer_checker .results td {
+    width: 2ch;
+    text-align: center;
+}
+.correct {
+    background-color: lightgreen;
+}
+.incorrect {
+    background-color: lightsalmon;
+    font-weight: bold;
+}
