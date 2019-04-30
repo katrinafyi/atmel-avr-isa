@@ -1,0 +1,595 @@
+{
+  "15. 8-bit Timer/Counter0 with PWM": {
+    "15.9.1 TCCR0A \u2013 Timer/Counter Control Register A": [
+      [
+        "7",
+        "6",
+        "5",
+        "4",
+        "3",
+        "2",
+        "1",
+        "0"
+      ],
+      [
+        "COM0A1",
+        "COM0A0",
+        "COM0B1",
+        "COM0B0",
+        "\u2013",
+        "\u2013",
+        "WGM01",
+        "WGM00"
+      ]
+    ],
+    "15.9.2 TCCR0B \u2013 Timer/Counter Control Register B": [
+      [
+        "7",
+        "6",
+        "5",
+        "4",
+        "3",
+        "2",
+        "1",
+        "0"
+      ],
+      [
+        "FOC0A",
+        "FOC0B",
+        "\u2013",
+        "\u2013",
+        "WGM02",
+        "CS02",
+        "CS01",
+        "CS00"
+      ]
+    ],
+    "Table 15-2. Compare Output mode, non-PWM mode": [
+      [
+        "COM0A1",
+        "COM0A0",
+        "Description"
+      ],
+      [
+        "0",
+        "0",
+        "Normal port operation, OC0A disconnected"
+      ],
+      [
+        "0",
+        "1",
+        "Toggle OC0A on Compare Match"
+      ],
+      [
+        "1",
+        "0",
+        "Clear OC0A on Compare Match"
+      ],
+      [
+        "1",
+        "1",
+        "Set OC0A on Compare Match"
+      ]
+    ],
+    "Table 15-3. Compare Output mode, Fast PWM mode (1)": [
+      [
+        "COM0A1",
+        "COM0A0",
+        "Description"
+      ],
+      [
+        "0",
+        "0",
+        "Normal port operation, OC0A disconnected."
+      ],
+      [
+        "0",
+        "1",
+        "WGM02 = 0: Normal Port Operation, OC0A Disconnected. WGM02 = 1: Toggle OC0A on Compare Match."
+      ],
+      [
+        "1",
+        "0",
+        "Clear OC0A on Compare Match, set OC0A at BOTTOM, (non-inverting mode)."
+      ],
+      [
+        "1",
+        "1",
+        "Set OC0A on Compare Match, clear OC0A at BOTTOM, (inverting mode)."
+      ]
+    ],
+    "Table 15-8. Waveform Generation mode bit description": [
+      [
+        "Mode",
+        "WGM2",
+        "WGM1",
+        "WGM0",
+        "Timer/Counter mode of operation",
+        "TOP",
+        "Update of OCRx at",
+        "TOV Flag set on (1)(2)"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "Normal",
+        "0xFF",
+        "Immediate",
+        "MAX"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "1",
+        "PWM, Phase correct",
+        "0xFF",
+        "TOP",
+        "BOTTOM"
+      ],
+      [
+        "2",
+        "0",
+        "1",
+        "0",
+        "CTC",
+        "OCRA",
+        "Immediate",
+        "MAX"
+      ],
+      [
+        "3",
+        "0",
+        "1",
+        "1",
+        "Fast PWM",
+        "0xFF",
+        "BOTTOM",
+        "MAX"
+      ],
+      [
+        "4",
+        "1",
+        "0",
+        "0",
+        "Reserved",
+        "\u2013",
+        "\u2013",
+        "\u2013"
+      ],
+      [
+        "5",
+        "1",
+        "0",
+        "1",
+        "PWM, Phase correct",
+        "OCRA",
+        "TOP",
+        "BOTTOM"
+      ],
+      [
+        "6",
+        "1",
+        "1",
+        "0",
+        "Reserved",
+        "\u2013",
+        "\u2013",
+        "\u2013"
+      ],
+      [
+        "7",
+        "1",
+        "1",
+        "1",
+        "Fast PWM",
+        "OCRA",
+        "BOTTOM",
+        "TOP"
+      ]
+    ],
+    "Table 15-9. Clock Select bit description": [
+      [
+        "CS02",
+        "CS01",
+        "CS00",
+        "Description"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "No clock source (Timer/Counter stopped)"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "clkI/O/(No prescaling)"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "clkI/O/8 (From prescaler)"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "clkI/O/64 (From prescaler)"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "clkI/O/256 (From prescaler)"
+      ],
+      [
+        "1",
+        "0",
+        "1",
+        "clkI/O/1024 (From prescaler)"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "External clock source on T0 pin. Clock on falling edge."
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "External clock source on T0 pin. Clock on rising edge."
+      ]
+    ]
+  },
+  "16. 16-bit Timer/Counter1 with PWM": {
+    "16.12.1 TCCRnA \u2013 Timer/Counter n Control Register A": [
+      [
+        "7",
+        "6",
+        "5",
+        "4",
+        "3",
+        "2",
+        "1",
+        "0"
+      ],
+      [
+        "COMnA1",
+        "COMnA0",
+        "COMnB1",
+        "COMnB0",
+        "\u2013",
+        "\u2013",
+        "WGMn1",
+        "WGMn0"
+      ]
+    ],
+    "16.12.2 TCCRnB \u2013 Timer/Counter n Control Register B": [
+      [
+        "7",
+        "6",
+        "5",
+        "4",
+        "3",
+        "2",
+        "1",
+        "0"
+      ],
+      [
+        "ICNCn",
+        "ICESn",
+        "\u2013",
+        "WGMn3",
+        "WGMn2",
+        "CSn2",
+        "CSn1",
+        "CSn0"
+      ]
+    ],
+    "Table 16-2. Compare Output mode, non-PWM": [
+      [
+        "COMnA1/COMnB1",
+        "COMnA0/COMnB0",
+        "Description"
+      ],
+      [
+        "0",
+        "0",
+        "Normal port operation, OCnA/OCnB disconnected."
+      ],
+      [
+        "0",
+        "1",
+        "Toggle OCnA/OCnB on Compare Match."
+      ],
+      [
+        "1",
+        "0",
+        "Clear OCnA/OCnB on Compare Match (Set output to low level)."
+      ],
+      [
+        "1",
+        "1",
+        "Set OCnA/OCnB on Compare Match (Set output to high level)."
+      ]
+    ],
+    "Table 16-3. Compare Output mode, fast PWM (1)": [
+      [
+        "COMnA1/COMnB1",
+        "COMnA0/COMnB0",
+        "Description"
+      ],
+      [
+        "0",
+        "0",
+        "Normal port operation, OCnA/OCnB disconnected."
+      ],
+      [
+        "0",
+        "1",
+        "WGMn3:0 = 14 or 15: Toggle OC1A on Compare Match, OC1B disconnected (normal port operation). \nFor all other WGM1 settings, normal port operation, OC1A/OC1B disconnected."
+      ],
+      [
+        "1",
+        "0",
+        "Clear OCnA/OCnB on Compare Match, set \nOCnA/OCnB at BOTTOM (non-inverting mode)"
+      ],
+      [
+        "1",
+        "1",
+        "Set OCnA/OCnB on Compare Match, clear \nOCnA/OCnB at BOTTOM (inverting mode)"
+      ]
+    ],
+    "Table 16-5. Waveform Generation mode bit description (1)": [
+      [
+        "Mode",
+        "WGMn3",
+        "WGMn2 (CTCn)",
+        "WGMn1 (PWMn1)",
+        "WGMn0 (PWMn0)",
+        "Timer/Counter mode of operation",
+        "TOP",
+        "Update of OCRnx at",
+        "TOVn flag set on"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "Normal",
+        "0xFFFF",
+        "Immediate",
+        "MAX"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "PWM, Phase Correct, 8-bit",
+        "0x00FF",
+        "TOP",
+        "BOTTOM"
+      ],
+      [
+        "2",
+        "0",
+        "0",
+        "1",
+        "0",
+        "PWM, Phase Correct, 9-bit",
+        "0x01FF",
+        "TOP",
+        "BOTTOM"
+      ],
+      [
+        "3",
+        "0",
+        "0",
+        "1",
+        "1",
+        "PWM, Phase Correct, 10-bit",
+        "0x03FF",
+        "TOP",
+        "BOTTOM"
+      ],
+      [
+        "4",
+        "0",
+        "1",
+        "0",
+        "0",
+        "CTC",
+        "OCRnA",
+        "Immediate",
+        "MAX"
+      ],
+      [
+        "5",
+        "0",
+        "1",
+        "0",
+        "1",
+        "Fast PWM, 8-bit",
+        "0x00FF",
+        "BOTTOM",
+        "TOP"
+      ],
+      [
+        "6",
+        "0",
+        "1",
+        "1",
+        "0",
+        "Fast PWM, 9-bit",
+        "0x01FF",
+        "BOTTOM",
+        "TOP"
+      ],
+      [
+        "7",
+        "0",
+        "1",
+        "1",
+        "1",
+        "Fast PWM, 10-bit",
+        "0x03FF",
+        "BOTTOM",
+        "TOP"
+      ],
+      [
+        "8",
+        "1",
+        "0",
+        "0",
+        "0",
+        "PWM, Phase and Frequency correct",
+        "ICRn",
+        "BOTTOM",
+        "BOTTOM"
+      ],
+      [
+        "9",
+        "1",
+        "0",
+        "0",
+        "1",
+        "PWM, Phase and Frequency correct",
+        "OCRnA",
+        "BOTTOM",
+        "BOTTOM"
+      ],
+      [
+        "10",
+        "1",
+        "0",
+        "1",
+        "0",
+        "PWM, Phase Correct",
+        "ICRn",
+        "TOP",
+        "BOTTOM"
+      ],
+      [
+        "11",
+        "1",
+        "0",
+        "1",
+        "1",
+        "PWM, Phase Correct",
+        "OCRnA",
+        "TOP",
+        "BOTTOM"
+      ],
+      [
+        "12",
+        "1",
+        "1",
+        "0",
+        "0",
+        "CTC",
+        "ICRn",
+        "Immediate",
+        "MAX"
+      ],
+      [
+        "13",
+        "1",
+        "1",
+        "0",
+        "1",
+        "(Reserved)",
+        "\u2013",
+        "\u2013",
+        "\u2013"
+      ],
+      [
+        "14",
+        "1",
+        "1",
+        "1",
+        "0",
+        "Fast PWM",
+        "ICRn",
+        "BOTTOM",
+        "TOP"
+      ],
+      [
+        "15",
+        "1",
+        "1",
+        "1",
+        "1",
+        "Fast PWM",
+        "OCRnA",
+        "BOTTOM",
+        "TOP"
+      ]
+    ],
+    "Table 16-6. Clock Select bit description": [
+      [
+        "CSn2",
+        "CSn1",
+        "CSn0",
+        "Description"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "No clock source (Timer/Counter stopped)."
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "clkI/O/1 (No prescaling)"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "clkI/O/8 (From prescaler)"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "clkI/O/64 (From prescaler)"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "clkI/O/256 (From prescaler)"
+      ],
+      [
+        "1",
+        "0",
+        "1",
+        "clkI/O/1024 (From prescaler)"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "External clock source on Tn pin. Clock on falling edge."
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "External clock source on Tn pin. Clock on rising edge."
+      ]
+    ]
+  }
+}
