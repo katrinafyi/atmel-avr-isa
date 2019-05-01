@@ -10,11 +10,10 @@
     </head>
     <body>
         <div id="header">
-            <div id="tabs">
-                <div class="tab-link" data-tab="instructions">Instructions</div>
-                <div class="tab-link" data-tab="operands">Operands</div>
-                <div class="tab-link" data-tab="notations">Notation</div>
+            <div class="tabs" data-tab-url="true">
+                <div class="tab-link" data-tab="assembly" data-tab-default="true">Assembly</div>
                 <div class="tab-link" data-tab="io_registers">IO Registers</div>
+                <div class="tab-link" data-tab="timers">Timers</div>
                 <div class="tab-link" data-tab="answer_checker">Answer Checker</div>
             </div>
 
@@ -23,42 +22,48 @@
             <span>Made by Kenton Lam (<a href="https://github.com/KentonLam/atmel-avr-isa">GitHub</a>).</span>
         </div>
         
-        <div id="instructions">
-            <input class="search-command" placeholder="Search commands" />
-            <input class="search-all" placeholder="Search all" />
-            <!-- <button class="sort" data-sort="name">
-              Sort
-            </button> -->
-          
-            <table>
-                <thead><tr><td>Command</td><td>Operands</td><td>Operation</td><td>Description</td><td>Flags</td><td>Cycles</td><td>Opcode</td><td>Example</td></tr></thead>
-                <tbody class="list">
-                </tbody>
-            </table>
-        </div>
+        <div id="assembly">
+            <div class="tabs">
+                <div class="tab-link" data-tab="instructions" data-tab-default="true">Instructions</div>
+                <div class="tab-link" data-tab="operands">Operands</div>
+                <div class="tab-link" data-tab="notations">Notation</div>
+            </div>
 
-        <div id="operands">
-        <table>
-            <thead><tr>
-                <td>Operand</td>
-                <td>Meaning</td>
-                <td>Values</td>
-                <td>Pattern</td>
-            </tr></thead>
-            <tbody class="list">
-            </tbody>
-        </table>
-        </div>
-
-        <div id="notations">
-            <table>
-                <thead><tr>
-                    <td>Notation</td>
-                    <td>Meaning</td>
-                </tr></thead>
-                <tbody class="list">
-                </tbody>
-            </table>
+            <div id="instructions">
+                <input class="search-command" placeholder="Search commands" />
+                <input class="search-all" placeholder="Search all" />
+                <!-- <button class="sort" data-sort="name">
+                Sort
+                </button> -->
+            
+                <table>
+                    <thead><tr><td>Command</td><td>Operands</td><td>Operation</td><td>Description</td><td>Flags</td><td>Cycles</td><td>Opcode</td><td>Example</td></tr></thead>
+                    <tbody class="list">
+                    </tbody>
+                </table>
+            </div>
+            <div id="operands">
+                <table>
+                    <thead><tr>
+                        <td>Operand</td>
+                        <td>Meaning</td>
+                        <td>Values</td>
+                        <td>Pattern</td>
+                    </tr></thead>
+                    <tbody class="list">
+                    </tbody>
+                </table>
+            </div>
+            <div id="notations">
+                <table>
+                    <thead><tr>
+                        <td>Notation</td>
+                        <td>Meaning</td>
+                    </tr></thead>
+                    <tbody class="list">
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div id="io_registers">
@@ -80,6 +85,8 @@
                 </tbody>
             </table>
         </div>
+
+        <div id="timers"></div>
 
         <div id="answer_checker">
             <table>

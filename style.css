@@ -16,7 +16,11 @@ body {
     justify-content: space-between;
     align-items: baseline;
 
-    margin: 15px 0;
+    margin-top: 15px;
+}
+
+.tabs {
+    margin-bottom: 8px;
 }
 
 .tab-link {
