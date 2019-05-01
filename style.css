@@ -104,3 +104,29 @@ td {
     background-color: lightsalmon;
     font-weight: bold;
 }
+
+#timers h3, #timers h4 {
+    margin-bottom: 6px;
+}
+
+#timers table {
+    font-family: sans-serif;
+}
+
+#timers td {
+    min-width: 6ch;
+    vertical-align: middle;
+}
+
+#timers .WGM {
+    background-color: #bfebfc;
+}
+#timers .COM {
+    background-color: #fcbfbf;
+}
+#timers .CS {
+    background-color: #dcfcbf;
+}
+#timers .FOC {
+    background-color: #e9bffc;
+}

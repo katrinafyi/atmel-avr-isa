@@ -45,7 +45,7 @@ function main() {
     qs(`.tab-link[data-tab=${selected}]`).click();
   }
 
-  function initAssembly() {
+  function initAssemblyTab() {
 
     const makeRowTemplate = (columns) => '<tr>' + columns.map(x => `<td class="${x}"></td>`).join(' ') + '</tr>';
 
@@ -114,7 +114,7 @@ function main() {
     ), 100));
   }
 
-  function initAnswerChecker() {
+  function initAnswerCheckerTab() {
 
     // Answer checker
     const responseBox = qs('textarea#responses');
@@ -159,11 +159,58 @@ function main() {
 
   }
 
-  // Timers
-  initAssembly();
-  initAnswerChecker();
-  initTabHandlers();
+  function initTimersTab() {
+    const COLOURED = ['COM', 'WGM', 'CS', 'FOC'];
 
+    const el = tag => document.createElement(tag);
+    const tableCell = text => {
+      let prefix = COLOURED.find(p => text.startsWith(p));
+      prefix = (text.length < 30) && prefix;
+      
+      const cls = prefix ? ` class="${prefix}"` : '';
+      return `<td${cls}>${_.escape(text).replace(/\n/g, '</br>')}</td>`;
+    };
+    const tableRow = (arr) => `<tr>`+arr.map(tableCell).join('')+'</tr>';
+    const makeTable = rows => {
+      const head = rows[0];
+      const tail = rows.slice(1);
+      const tbl = el('table');
+
+      tbl.innerHTML = `<thead>${tableRow(head)}</thead>
+        <tbody>${tail.map(tableRow).join('')}</tbody>`;
+      return tbl;
+    };
+
+    
+    const timersDiv = qs('#timers');
+    fetch('data/timers.json')
+    .then(resp => resp.json())
+    .then(data => {
+      const frag = document.createDocumentFragment();
+      for (const sectionName of Object.keys(data)) {
+        const section = data[sectionName];
+        const h3 = el('h3');
+        h3.textContent = sectionName;
+        frag.appendChild(h3);
+
+        for (const tableName of Object.keys(section)) {
+          const rows = section[tableName];
+          const h4 = el('h4');
+          h4.textContent = tableName;
+          frag.appendChild(h4);
+          frag.appendChild(makeTable(rows));
+        }
+        frag.appendChild(el('hr'));
+      }
+      timersDiv.appendChild(frag);
+    });
+  }
+
+  initAssemblyTab();
+  initTimersTab();
+  initAnswerCheckerTab();
+
+  initTabHandlers();
 }
 
 window.addEventListener('DOMContentLoaded', main);
