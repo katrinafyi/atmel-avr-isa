@@ -105,6 +105,10 @@ td {
     font-weight: bold;
 }
 
+#timers .equation {
+    width: 16em;
+}
+
 #timers h3, #timers h4 {
     margin-bottom: 6px;
 }
